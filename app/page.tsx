@@ -154,25 +154,18 @@ export default function HomePage() {
             <div className="relative lg:ml-8">
               <div className="relative">
                 {/* Decorative Elements */}
-                <div className="absolute -top-8 -left-8 w-16 h-16 bg-champagne-300 rounded-full opacity-60"></div>
+                <div className="absolute -top-8 -left-8 w-16 h-16 bg-peach-300 rounded-full opacity-60"></div>
                 <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-peach-200 rounded-full opacity-40"></div>
                 
                 <div className="relative z-10">
-                  <Image
-                    src="/images/hero-dr-fernando.jpg"
-                    alt="Dr. Fernando Del Piero"
-                    width={600}
-                    height={700}
-                    className="rounded-3xl shadow-2xl object-cover"
-                    priority
-                  />
+                  {/* Imagem removida conforme solicitado */}
                 </div>
                 
                 {/* Floating Cards */}
-                <div className="absolute -bottom-6 -left-6 bg-champagne-100/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-champagne-300">
+                <div className="absolute -bottom-6 -left-6 bg-champagne-100/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-peach-300">
                   <div className="flex items-center space-x-3">
                     <div className="w-12 h-12 bg-champagne-200 rounded-full flex items-center justify-center">
-                      <Heart className="h-6 w-6 text-champagne-700" />
+                      <Users className="h-6 w-6 text-champagne-700" />
                     </div>
                     <div>
                       <div className="text-2xl font-bold text-charcoal-900">500+</div>
@@ -181,7 +174,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 
-                <div className="absolute -top-6 -right-6 bg-champagne-100/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-champagne-300">
+                <div className="absolute -top-6 -right-6 bg-champagne-100/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-peach-300">
                   <div className="flex items-center space-x-3">
                     <div className="w-12 h-12 bg-peach-200 rounded-full flex items-center justify-center">
                       <Star className="h-6 w-6 text-peach-700" />
@@ -222,7 +215,7 @@ export default function HomePage() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div className="text-center group">
-              <div className="w-20 h-20 bg-champagne-200 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-champagne-300 transition-colors duration-300">
+              <div className="w-20 h-20 bg-champagne-200 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-peach-300 transition-colors duration-300">
                 <Users className="h-10 w-10 text-champagne-700" />
               </div>
               <div className="text-5xl font-bold text-charcoal-900 mb-2">500+</div>
@@ -236,7 +229,7 @@ export default function HomePage() {
               <div className="text-lg text-charcoal-600 font-medium">Anos de experiência</div>
             </div>
             <div className="text-center group">
-              <div className="w-20 h-20 bg-champagne-300 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-champagne-400 transition-colors duration-300">
+              <div className="w-20 h-20 bg-peach-300 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-champagne-400 transition-colors duration-300">
                 <Star className="h-10 w-10 text-champagne-700" />
               </div>
               <div className="text-5xl font-bold text-charcoal-900 mb-2">95%</div>
@@ -269,7 +262,7 @@ export default function HomePage() {
             {features.map((feature, index) => (
               <div key={index} className="group">
                 <div className="bg-champagne-100/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-champagne-200 h-full">
-                  <div className="w-16 h-16 bg-gradient-to-br from-peach-200 to-champagne-300 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-br from-peach-200 to-peach-300 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                     <div className="text-peach-700">
                       {feature.icon}
                     </div>
@@ -418,31 +411,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Final */}
-      <section className="py-20 bg-peach-300">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Pronto para transformar sua saúde?
-          </h2>
-          <p className="mt-4 text-xl text-white/90">
-            Agende sua consulta e comece sua jornada rumo ao bem-estar
-          </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-champagne-200 text-champagne-800 hover:bg-champagne-100 hover:shadow-lg hover:shadow-champagne-200/25">
-              <Link href={whatsappLink('Olá! Gostaria de agendar uma consulta.')}>
-                <Phone className="mr-2 h-5 w-5" />
-                WhatsApp
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-champagne-200 text-champagne-200 hover:bg-champagne-200 hover:text-champagne-800">
-              <Link href={process.env.NEXT_PUBLIC_CALENDLY_URL || '#'}>
-                <Calendar className="mr-2 h-5 w-5" />
-                Agendar Online
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

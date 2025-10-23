@@ -7,7 +7,6 @@
 
 @layer base {
   :root {
-    --background: 245 240 235; /* #F5F0EB - Bege claro champanhe */
     --foreground: 35 35 35; /* #232323 - Texto escuro */
     --card: 253 252 251; /* #FDFCFB - Card mais claro */
     --card-foreground: 35 35 35; /* #232323 - Texto escuro */

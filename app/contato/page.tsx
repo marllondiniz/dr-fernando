@@ -221,31 +221,6 @@ export default function ContatoPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 bg-primary">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Pronto para começar?
-          </h2>
-          <p className="mt-4 text-xl text-primary-foreground">
-            Agende sua consulta e dê o primeiro passo rumo aos seus objetivos
-          </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-peach-300 text-white hover:bg-peach-300/90 hover:shadow-lg hover:shadow-peach-300/25">
-              <Link href={whatsappLink('Olá! Gostaria de agendar uma consulta.')}>
-                <Phone className="mr-2 h-5 w-5" />
-                WhatsApp
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-peach-300 text-peach-400 hover:bg-peach-300 hover:text-white">
-              <Link href={process.env.NEXT_PUBLIC_CALENDLY_URL || '#'}>
-                <Calendar className="mr-2 h-5 w-5" />
-                Agendar Online
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

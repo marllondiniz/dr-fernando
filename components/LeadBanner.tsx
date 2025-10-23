@@ -46,7 +46,7 @@ export function LeadBanner() {
             </Button>
             <button
               onClick={handleDismiss}
-              className="text-charcoal-600 hover:text-charcoal-800 hover:bg-champagne-300 rounded-full p-1 transition-all duration-200 hover:scale-110"
+              className="text-charcoal-600 hover:text-charcoal-800 hover:bg-peach-300 rounded-full p-1 transition-all duration-200 hover:scale-110"
             >
               <X className="h-4 w-4" />
             </button>

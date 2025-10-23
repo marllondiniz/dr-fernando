@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { LeadBanner } from '@/components/LeadBanner'
 import { WhatsAppFloatButton } from '@/components/WhatsAppFloatButton'
 import { MetaPixel } from '@/components/analytics/MetaPixel'
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics'
@@ -59,7 +58,6 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <LeadBanner />
         <Header />
         <main>{children}</main>
         <Footer />

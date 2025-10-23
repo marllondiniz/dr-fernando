@@ -55,7 +55,6 @@ const config: Config = {
         champagne: {
           50: "#FDFCFB",
           100: "#F9F6F3",
-          200: "#F5F0EB", // Bege claro principal
           300: "#F0E8E0",
           400: "#E8DCCF",
           500: "#DFD0C0",

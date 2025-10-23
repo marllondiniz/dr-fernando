@@ -20,7 +20,7 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 bg-champagne-200/95 backdrop-blur-md border-b border-champagne-300">
+    <header className="sticky top-0 z-50 bg-champagne-200/95 backdrop-blur-md border-b border-peach-300">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5 group">
@@ -34,7 +34,7 @@ export function Header() {
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-charcoal-700 hover:text-peach-300 hover:bg-champagne-300 transition-all duration-300 hover:scale-110"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-charcoal-700 hover:text-peach-300 hover:bg-peach-300 transition-all duration-300 hover:scale-110"
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Abrir menu principal</span>
@@ -69,7 +69,7 @@ export function Header() {
       {mobileMenuOpen && (
         <div className="lg:hidden">
           <div className="fixed inset-0 z-50" />
-          <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-champagne-200/95 backdrop-blur-md px-6 py-6 sm:max-w-sm border-l border-champagne-300">
+          <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-champagne-200/95 backdrop-blur-md px-6 py-6 sm:max-w-sm border-l border-peach-300">
             <div className="flex items-center justify-between">
               <Link href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">Dr. Fernando Del Piero</span>
@@ -77,7 +77,7 @@ export function Header() {
               </Link>
               <button
                 type="button"
-                className="-m-2.5 rounded-md p-2.5 text-charcoal-700 hover:text-peach-300 hover:bg-champagne-300 transition-all duration-300 hover:scale-110"
+                className="-m-2.5 rounded-md p-2.5 text-charcoal-700 hover:text-peach-300 hover:bg-peach-300 transition-all duration-300 hover:scale-110"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="sr-only">Fechar menu</span>
@@ -85,13 +85,13 @@ export function Header() {
               </button>
             </div>
             <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-champagne-300/50">
+              <div className="-my-6 divide-y divide-peach-300/50">
                 <div className="space-y-2 py-6">
                   {navigation.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-charcoal-900 hover:bg-champagne-300/50 hover:text-peach-300 transition-all duration-300 hover:scale-105"
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-charcoal-900 hover:bg-peach-300/50 hover:text-peach-300 transition-all duration-300 hover:scale-105"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}
