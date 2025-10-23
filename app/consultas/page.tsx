@@ -78,36 +78,6 @@ const includedItems = [
   'Ajustes no protocolo conforme necessário'
 ]
 
-const plans = [
-  {
-    name: 'Consulta Inicial',
-    price: 'R$ 450',
-    duration: 'Primeira consulta',
-    description: 'Anamnese completa, solicitação de exames e plano inicial',
-    features: [
-      'Anamnese detalhada (90 min)',
-      'Solicitação de exames',
-      'Plano inicial personalizado',
-      'Materiais educativos',
-      'Suporte por 7 dias'
-    ],
-    popular: false
-  },
-  {
-    name: 'Acompanhamento',
-    price: 'R$ 200',
-    duration: 'Consulta de retorno',
-    description: 'Acompanhamento e ajustes no protocolo',
-    features: [
-      'Consulta de retorno (45 min)',
-      'Análise de resultados',
-      'Ajustes no protocolo',
-      'Check-ins semanais',
-      'Suporte contínuo'
-    ],
-    popular: true
-  }
-]
 
 const faqs = [
   {
@@ -249,50 +219,6 @@ export default function ConsultasPage() {
         </div>
       </section>
 
-      {/* Pricing */}
-      <section className="py-20 bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Investimento
-            </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Transparência total nos valores
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {plans.map((plan, index) => (
-              <Card key={index} className={plan.popular ? 'ring-2 ring-primary' : ''}>
-                {plan.popular && (
-                  <div className="bg-primary text-white text-center py-2 text-sm font-semibold">
-                    Mais Popular
-                  </div>
-                )}
-                <CardHeader className="text-center">
-                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                  <div className="text-4xl font-bold text-primary">{plan.price}</div>
-                  <CardDescription className="text-base">{plan.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-gray-600">
-                        <CheckCircle className="mr-3 h-4 w-4 text-peach-400" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button asChild className="w-full mt-6" size="lg">
-                    <Link href={whatsappLink(`Olá! Gostaria de agendar uma ${plan.name.toLowerCase()}.`)}>
-                      Agendar {plan.name}
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* FAQ */}
       <section className="py-20 bg-gray-50">
