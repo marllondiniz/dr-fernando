@@ -29,8 +29,8 @@ Crie um arquivo `.env.local` com suas configurações:
 # Site URL (substitua pelo seu domínio)
 NEXT_PUBLIC_SITE_URL=https://drfernandodelpiero.com
 
-# WhatsApp (formato: 5527999999999)
-NEXT_PUBLIC_WHATSAPP=5527999999999
+# WhatsApp (formato: 5527999669050)
+NEXT_PUBLIC_WHATSAPP=5527999669050
 
 # Calendly (sua URL do Calendly)
 NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/drfernandodelpiero/consulta
@@ -114,7 +114,7 @@ vercel --prod
 
 1. **Criar conta WhatsApp Business**
 2. **Configurar número de telefone**
-   - Formato: 5527999999999 (sem + e espaços)
+   - Formato: 5527999669050 (sem + e espaços)
 3. **Testar integração**
    - Acesse o site
    - Clique nos botões do WhatsApp

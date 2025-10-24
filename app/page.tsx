@@ -15,7 +15,8 @@ import {
   Star,
   ArrowRight,
   Calendar,
-  Phone
+  Phone,
+  Shield
 } from 'lucide-react'
 
 export const metadata = generateMetadata({
@@ -125,65 +126,40 @@ export default function HomePage() {
             <div className="space-y-8">
               <div className="space-y-6">
                 <h1 className="text-5xl lg:text-7xl font-bold tracking-tight text-charcoal-900 leading-tight">
-                  <span className="block font-serif">A saúde metabólica</span>
-                  <span className="block text-peach-300 font-serif">reflete quem você é.</span>
-                </h1>
+                  <span className="block font-serif">Saúde metabólica</span>
+                  <span className="block text-peach-300 font-serif">do jeito que você precisa.</span>
+              </h1>
                 <p className="text-xl lg:text-2xl leading-relaxed text-charcoal-700 font-light max-w-2xl">
-                  Na consultoria do Dr. Fernando, cada detalhe do seu metabolismo é tratado com 
-                  <span className="text-peach-400 font-medium"> cuidado, técnica e propósito</span> para 
-                  realçar sua melhor versão com naturalidade e harmonia.
+                  Sem salas de espera ou consultas demoradas. Apenas protocolos baseados na ciência, 
+                  <span className="text-peach-400 font-medium"> entregues direto para você</span>, com acompanhamento durante todo o processo.
                 </p>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-6 pt-4">
+              <div className="flex justify-start pt-4">
                 <Button asChild size="lg" className="bg-peach-300 hover:bg-peach-400 text-white px-8 py-4 text-lg font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                  <Link href={whatsappLink('Olá! Gostaria de agendar uma consulta.')}>
-                    <Phone className="mr-3 h-6 w-6" />
-                    Agendar uma consulta!
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="border-2 border-champagne-400 text-champagne-700 hover:bg-champagne-400 hover:text-white px-8 py-4 text-lg font-medium rounded-full transition-all duration-300 hover:scale-105">
-                  <Link href="/protocolos">
-                    Conhecer protocolos
-                    <ArrowRight className="ml-3 h-5 w-5" />
+                  <Link href="/quiz">
+                    <ArrowRight className="mr-3 h-6 w-6" />
+                    Descobrir meu protocolo ideal
                   </Link>
                 </Button>
               </div>
             </div>
             
             <div className="relative lg:ml-8">
-              <div className="relative">
+            <div className="relative">
                 {/* Decorative Elements */}
                 <div className="absolute -top-8 -left-8 w-16 h-16 bg-peach-300 rounded-full opacity-60"></div>
                 <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-peach-200 rounded-full opacity-40"></div>
                 
                 <div className="relative z-10">
-                  {/* Imagem removida conforme solicitado */}
-                </div>
-                
-                {/* Floating Cards */}
-                <div className="absolute -bottom-6 -left-6 bg-champagne-100/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-peach-300">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-champagne-200 rounded-full flex items-center justify-center">
-                      <Users className="h-6 w-6 text-champagne-700" />
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-charcoal-900">500+</div>
-                      <div className="text-sm text-charcoal-600">Pacientes atendidos</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="absolute -top-6 -right-6 bg-champagne-100/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-peach-300">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-peach-200 rounded-full flex items-center justify-center">
-                      <Star className="h-6 w-6 text-peach-700" />
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-charcoal-900">95%</div>
-                      <div className="text-sm text-charcoal-600">Satisfação</div>
-                    </div>
-                  </div>
+                  <Image
+                    src="/dr-fernando.jpg"
+                    alt="Dr. Fernando Del Piero - Médico Especialista em Metabolismo"
+                    width={500}
+                    height={600}
+                    className="rounded-2xl shadow-xl"
+                    priority
+                  />
                 </div>
               </div>
             </div>
@@ -195,6 +171,47 @@ export default function HomePage() {
           <svg className="w-full h-20 text-white" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="currentColor"></path>
           </svg>
+        </div>
+      </section>
+
+      {/* Benefits Section - Similar to Manual */}
+      <section className="py-16 bg-white">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div className="space-y-4">
+              <div className="w-16 h-16 bg-peach-200 rounded-full flex items-center justify-center mx-auto">
+                <Shield className="h-8 w-8 text-peach-700" />
+              </div>
+              <h3 className="text-lg font-semibold text-charcoal-900">
+                Protocolos baseados na ciência
+              </h3>
+              <p className="text-charcoal-600">
+                Tratamentos elaborados e prescritos por médicos especialistas
+              </p>
+            </div>
+            <div className="space-y-4">
+              <div className="w-16 h-16 bg-peach-200 rounded-full flex items-center justify-center mx-auto">
+                <Zap className="h-8 w-8 text-peach-700" />
+              </div>
+              <h3 className="text-lg font-semibold text-charcoal-900">
+                Consultas online rápidas
+              </h3>
+              <p className="text-charcoal-600">
+                Sem salas de espera. Apenas alguns minutos para sua avaliação
+              </p>
+            </div>
+            <div className="space-y-4">
+              <div className="w-16 h-16 bg-peach-200 rounded-full flex items-center justify-center mx-auto">
+                <Heart className="h-8 w-8 text-peach-700" />
+              </div>
+              <h3 className="text-lg font-semibold text-charcoal-900">
+                Acompanhamento contínuo
+              </h3>
+              <p className="text-charcoal-600">
+                Suporte médico durante todo o processo de tratamento
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -215,8 +232,8 @@ export default function HomePage() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div className="text-center group">
-              <div className="w-20 h-20 bg-champagne-200 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-peach-300 transition-colors duration-300">
-                <Users className="h-10 w-10 text-champagne-700" />
+              <div className="w-20 h-20 bg-peach-200 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-peach-300 transition-colors duration-300">
+                <Users className="h-10 w-10 text-peach-700" />
               </div>
               <div className="text-5xl font-bold text-charcoal-900 mb-2">500+</div>
               <div className="text-lg text-charcoal-600 font-medium">Pacientes atendidos</div>
@@ -229,8 +246,8 @@ export default function HomePage() {
               <div className="text-lg text-charcoal-600 font-medium">Anos de experiência</div>
             </div>
             <div className="text-center group">
-              <div className="w-20 h-20 bg-peach-300 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-champagne-400 transition-colors duration-300">
-                <Star className="h-10 w-10 text-champagne-700" />
+              <div className="w-20 h-20 bg-peach-200 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-peach-300 transition-colors duration-300">
+                <Star className="h-10 w-10 text-peach-700" />
               </div>
               <div className="text-5xl font-bold text-charcoal-900 mb-2">95%</div>
               <div className="text-lg text-charcoal-600 font-medium">Taxa de satisfação</div>

@@ -43,7 +43,7 @@ cp env.example .env.local
 Edite o arquivo `.env.local` com suas configurações:
 ```env
 NEXT_PUBLIC_SITE_URL=https://drfernandodelpiero.com
-NEXT_PUBLIC_WHATSAPP=5527999999999
+NEXT_PUBLIC_WHATSAPP=5527999669050
 NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/drfernandodelpiero/consulta
 NEXT_PUBLIC_META_PIXEL_ID=seu_pixel_id
 NEXT_PUBLIC_GA_ID=seu_ga_id
