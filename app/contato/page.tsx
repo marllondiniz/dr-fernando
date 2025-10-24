@@ -23,7 +23,7 @@ const contactInfo = [
     icon: <Phone className="h-6 w-6" />,
     title: 'WhatsApp',
     description: 'Resposta rápida e agendamento direto',
-    value: '+55 27 99999-9999',
+    value: '+55 27 99689-4540',
     action: 'Conversar no WhatsApp',
     href: whatsappLink('Olá! Gostaria de agendar uma consulta.')
   },

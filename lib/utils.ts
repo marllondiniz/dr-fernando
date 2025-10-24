@@ -7,8 +7,8 @@ export function cn(...inputs: ClassValue[]) {
 
 // Utilitários para WhatsApp
 export function whatsappLink(message?: string): string {
-  const phone = process.env.NEXT_PUBLIC_WHATSAPP || '5527999669050'
-  const baseUrl = `https://wa.me/${phone}`
+  const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP || '5527996894540'
+  const baseUrl = `https://wa.me/${phoneNumber}`
   
   if (message) {
     const encodedMessage = encodeURIComponent(message)

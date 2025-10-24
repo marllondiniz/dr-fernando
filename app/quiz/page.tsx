@@ -1,275 +1,621 @@
-import type { Metadata } from 'next'
+'use client'
+
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { generateMetadata } from '@/lib/utils'
 import { 
   ArrowRight, 
-  CheckCircle,
   Heart,
   TrendingDown,
   Zap,
-  Clock,
-  Shield
+  ChevronRight
 } from 'lucide-react'
 import Link from 'next/link'
+import { useState } from 'react'
+import { whatsappLink } from '@/lib/utils'
 
-export const metadata = generateMetadata({
-  title: 'Quiz de Saúde Metabólica - Dr. Fernando Del Piero',
-  description: 'Descubra qual protocolo é ideal para você através do nosso questionário de saúde metabólica personalizado.',
-  path: '/quiz'
-})
-
-const questions = [
+const mainOptions = [
   {
-    id: 'objetivo',
-    title: 'Qual é o seu principal objetivo?',
-    options: [
-      { value: 'emagrecimento', label: 'Emagrecimento e perda de peso', icon: <TrendingDown className="h-6 w-6" /> },
-      { value: 'energia', label: 'Mais energia e disposição', icon: <Zap className="h-6 w-6" /> },
-      { value: 'hormonal', label: 'Equilíbrio hormonal', icon: <Heart className="h-6 w-6" /> },
-      { value: 'metabolismo', label: 'Acelerar o metabolismo', icon: <Clock className="h-6 w-6" /> }
-    ]
+    id: 'emagrecimento',
+    title: 'Emagrecimento',
+    description: 'Perda de peso sustentável e aceleração metabólica',
+    icon: <TrendingDown className="h-8 w-8" />,
+    color: 'bg-coral',
+    hoverColor: 'hover:bg-coral/90'
   },
   {
-    id: 'idade',
-    title: 'Qual é a sua faixa etária?',
-    options: [
-      { value: '18-30', label: '18 a 30 anos' },
-      { value: '31-40', label: '31 a 40 anos' },
-      { value: '41-50', label: '41 a 50 anos' },
-      { value: '51+', label: 'Acima de 50 anos' }
-    ]
+    id: 'hormonal',
+    title: 'Saúde Hormonal',
+    description: 'Equilíbrio hormonal e otimização metabólica',
+    icon: <Heart className="h-8 w-8" />,
+    color: 'bg-coral',
+    hoverColor: 'hover:bg-coral/90'
   },
   {
-    id: 'sintomas',
-    title: 'Quais sintomas você apresenta? (pode marcar mais de um)',
-    options: [
-      { value: 'fadiga', label: 'Fadiga constante' },
-      { value: 'ganho-peso', label: 'Dificuldade para perder peso' },
-      { value: 'ansiedade', label: 'Ansiedade e estresse' },
-      { value: 'insonia', label: 'Problemas de sono' },
-      { value: 'menopausa', label: 'Sintomas da menopausa' },
-      { value: 'resistencia-insulina', label: 'Resistência à insulina' }
-    ],
-    multiple: true
-  },
-  {
-    id: 'estilo-vida',
-    title: 'Como você descreveria seu estilo de vida atual?',
-    options: [
-      { value: 'sedentario', label: 'Sedentário - pouco exercício' },
-      { value: 'moderado', label: 'Moderado - exercício ocasional' },
-      { value: 'ativo', label: 'Ativo - exercício regular' },
-      { value: 'muito-ativo', label: 'Muito ativo - exercício intenso' }
-    ]
-  },
-  {
-    id: 'alimentacao',
-    title: 'Como você descreveria sua alimentação atual?',
-    options: [
-      { value: 'irregular', label: 'Irregular - como quando posso' },
-      { value: 'tradicional', label: 'Tradicional brasileira' },
-      { value: 'saudavel', label: 'Tento manter saudável' },
-      { value: 'restritiva', label: 'Sigo dietas restritivas' }
-    ]
+    id: 'energia',
+    title: 'Mais Energia',
+    description: 'Aumento de energia e disposição',
+    icon: <Zap className="h-8 w-8" />,
+    color: 'bg-coral',
+    hoverColor: 'hover:bg-coral/90'
   }
 ]
 
-const protocols = {
-  'jejum-hormonal': {
-    title: 'Jejum Hormonal',
-    description: 'Protocolo ideal para otimização hormonal e aceleração metabólica',
-    benefits: [
-      'Otimização da insulina',
-      'Regulação do cortisol',
-      'Aumento do hormônio do crescimento',
-      'Melhora da sensibilidade hormonal'
-    ],
-    icon: <Clock className="h-8 w-8" />
-  },
-  'saude-hormonal': {
-    title: 'Saúde Hormonal',
-    description: 'Abordagem completa para equilíbrio hormonal',
-    benefits: [
-      'Controle de sintomas da menopausa',
-      'Otimização da testosterona',
-      'Melhora da libido e energia',
-      'Equilíbrio hormonal geral'
-    ],
-    icon: <Heart className="h-8 w-8" />
-  },
-  'emagrecimento': {
-    title: 'Emagrecimento Inteligente',
-    description: 'Metabolismo acelerado e perda de peso sustentável',
-    benefits: [
-      'Perda de peso eficaz',
-      'Aceleração metabólica',
-      'Estratégias anti-platô',
-      'Manutenção sustentável'
-    ],
-    icon: <TrendingDown className="h-8 w-8" />
-  }
+const subQuestions = {
+  emagrecimento: [
+    {
+      question: 'Qual é sua faixa etária?',
+      options: [
+        '18-30 anos',
+        '31-40 anos', 
+        '41-50 anos',
+        'Acima de 50 anos'
+      ]
+    },
+    {
+      question: 'Há quanto tempo você tenta emagrecer?',
+      options: [
+        'Menos de 6 meses',
+        '6 meses a 1 ano',
+        '1 a 2 anos',
+        'Mais de 2 anos'
+      ]
+    },
+    {
+      question: 'Qual sua principal dificuldade?',
+      options: [
+        'Controle da fome',
+        'Platô de peso',
+        'Compulsão alimentar',
+        'Falta de motivação'
+      ]
+    },
+    {
+      question: 'Como você descreve sua alimentação atual?',
+      options: [
+        'Muito irregular',
+        'Tento manter saudável',
+        'Sigo dietas restritivas',
+        'Como de tudo sem controle'
+      ]
+    }
+  ],
+  hormonal: [
+    {
+      question: 'Você está na menopausa?',
+      options: [
+        'Sim, há mais de 1 ano',
+        'Sim, há menos de 1 ano',
+        'Não, mas tenho sintomas',
+        'Não, estou longe da menopausa'
+      ]
+    },
+    {
+      question: 'Quais sintomas hormonais você apresenta?',
+      options: [
+        'Ondas de calor',
+        'Alterações de humor',
+        'Ganho de peso',
+        'Todos os anteriores'
+      ]
+    },
+    {
+      question: 'Como está sua energia?',
+      options: [
+        'Muito baixa',
+        'Baixa',
+        'Moderada',
+        'Alta'
+      ]
+    },
+    {
+      question: 'Você tem problemas de sono?',
+      options: [
+        'Insônia frequente',
+        'Acordo várias vezes',
+        'Durmo mal ocasionalmente',
+        'Durmo bem'
+      ]
+    }
+  ],
+  energia: [
+    {
+      question: 'Como você se sente ao acordar?',
+      options: [
+        'Muito cansado',
+        'Cansado',
+        'Moderadamente energético',
+        'Muito energético'
+      ]
+    },
+    {
+      question: 'Qual seu nível de energia durante o dia?',
+      options: [
+        'Muito baixo',
+        'Baixo',
+        'Moderado',
+        'Alto'
+      ]
+    },
+    {
+      question: 'O que mais te incomoda?',
+      options: [
+        'Fadiga constante',
+        'Falta de foco',
+        'Baixa motivação',
+        'Sono durante o dia'
+      ]
+    },
+    {
+      question: 'Como você se alimenta?',
+      options: [
+        'Pouco e irregular',
+        'Normal mas sem energia',
+        'Bem mas ainda cansado',
+        'Bem e com energia'
+      ]
+    }
+  ]
 }
 
 export default function QuizPage() {
+  const [selectedOption, setSelectedOption] = useState<string | null>(null)
+  const [currentStep, setCurrentStep] = useState<'main' | 'questions' | 'result'>('main')
+  const [answers, setAnswers] = useState<{[key: string]: string}>({})
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [userData, setUserData] = useState<{
+    name: string
+    email: string
+    phone: string
+  }>({
+    name: '',
+    email: '',
+    phone: ''
+  })
+  const [showContactForm, setShowContactForm] = useState(false)
+
+  const handleOptionSelect = (optionId: string) => {
+    setSelectedOption(optionId)
+    setCurrentStep('questions')
+    setCurrentQuestionIndex(0)
+    setAnswers({})
+  }
+
+  const handleBackToMain = () => {
+    setSelectedOption(null)
+    setCurrentStep('main')
+    setCurrentQuestionIndex(0)
+    setAnswers({})
+  }
+
+  const handleAnswerSelect = (answer: string) => {
+    const questionKey = `${selectedOption}_${currentQuestionIndex}`
+    setAnswers(prev => ({ ...prev, [questionKey]: answer }))
+    
+    const questions = selectedOption ? subQuestions[selectedOption as keyof typeof subQuestions] : []
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1)
+    } else {
+      setCurrentStep('result')
+    }
+  }
+
+  const handlePreviousQuestion = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(prev => prev - 1)
+    }
+  }
+
+  const getProtocolRecommendation = () => {
+    if (!selectedOption) return null
+    
+    const protocols = {
+      emagrecimento: {
+        title: 'Protocolo de Emagrecimento Inteligente',
+        description: 'Baseado nas suas respostas, recomendamos um protocolo focado em aceleração metabólica e perda de peso sustentável.',
+        benefits: [
+          'Jejum intermitente personalizado',
+          'Otimização da insulina',
+          'Estratégias anti-platô',
+          'Manutenção sustentável do peso'
+        ],
+        duration: '3-6 meses',
+        price: 'A partir de R$ 297/mês'
+      },
+      hormonal: {
+        title: 'Protocolo de Saúde Hormonal',
+        description: 'Abordagem completa para equilíbrio hormonal e otimização metabólica baseada em evidências científicas.',
+        benefits: [
+          'Equilíbrio hormonal natural',
+          'Controle de sintomas da menopausa',
+          'Otimização da testosterona',
+          'Melhora da energia e libido'
+        ],
+        duration: '4-8 meses',
+        price: 'A partir de R$ 397/mês'
+      },
+      energia: {
+        title: 'Protocolo de Energia e Vitalidade',
+        description: 'Foco em aumentar energia, disposição e qualidade de vida através de otimização metabólica.',
+        benefits: [
+          'Aumento de energia sustentável',
+          'Melhora da qualidade do sono',
+          'Otimização nutricional',
+          'Redução do estresse'
+        ],
+        duration: '2-4 meses',
+        price: 'A partir de R$ 247/mês'
+      }
+    }
+    
+    return protocols[selectedOption as keyof typeof protocols]
+  }
+
+  const generateWhatsAppMessage = () => {
+    const protocol = getProtocolRecommendation()
+    if (!protocol || !selectedOption) return ''
+    
+    const answersText = Object.entries(answers)
+      .map(([key, value]) => {
+        const questionIndex = parseInt(key.split('_')[1])
+        const questions = subQuestions[selectedOption as keyof typeof subQuestions]
+        const question = questions[questionIndex]
+        return `• ${question.question}: ${value}`
+      })
+      .join('\n')
+    
+    return `Olá Dr. Fernando! 
+
+Completei o questionário de saúde metabólica e gostaria de agendar uma consulta gratuita.
+
+*Meu perfil:*
+• Objetivo principal: ${mainOptions.find(opt => opt.id === selectedOption)?.title}
+• Protocolo recomendado: ${protocol.title}
+
+*Minhas respostas:*
+${answersText}
+
+*Meus dados:*
+• Nome: ${userData.name}
+• Email: ${userData.email}
+• Telefone: ${userData.phone}
+
+Aguardo seu retorno para agendarmos a consulta gratuita!`
+  }
+
+  const handleContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (userData.name && userData.email && userData.phone) {
+      const message = generateWhatsAppMessage()
+      window.open(whatsappLink(message), '_blank')
+    }
+  }
+
+  const handleScheduleClick = () => {
+    if (userData.name && userData.email && userData.phone) {
+      const message = generateWhatsAppMessage()
+      window.open(whatsappLink(message), '_blank')
+    } else {
+      setShowContactForm(true)
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-champagne-100 to-peach-100">
-      {/* Hero Section */}
-      <section className="py-20">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold tracking-tight text-charcoal-900 mb-6">
-            <span className="font-serif">Descubra qual protocolo</span>
-            <span className="block text-peach-400 font-serif">é ideal para você</span>
-          </h1>
-          <p className="text-xl text-charcoal-700 mb-8 max-w-2xl mx-auto">
-            Responda algumas perguntas sobre sua saúde e objetivos para receber uma recomendação personalizada do Dr. Fernando.
-          </p>
-          <div className="flex items-center justify-center space-x-2 text-peach-600">
-            <Shield className="h-5 w-5" />
-            <span className="text-sm font-medium">100% confidencial e seguro</span>
+    <div className="min-h-screen bg-white">
+      {/* Progress Bar */}
+      <div className="bg-champagne-100">
+        <div className="mx-auto max-w-4xl px-6 py-4">
+          <div className="flex items-center justify-center space-x-8 text-sm font-semibold text-charcoal-700 uppercase">
+            <div className={`flex items-center ${currentStep === 'main' ? 'text-coral' : 'text-charcoal-700'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-2 ${
+                currentStep === 'main' ? 'bg-coral text-white' : 'bg-charcoal-700 text-white'
+              }`}>
+                1
+              </div>
+              Questionário
+            </div>
+            <ChevronRight className="h-4 w-4" />
+            <div className={`flex items-center ${currentStep === 'questions' ? 'text-coral' : 'text-charcoal-700'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-2 ${
+                currentStep === 'questions' ? 'bg-coral text-white' : 'bg-charcoal-700 text-white'
+              }`}>
+                2
+              </div>
+              Tratamento
+            </div>
+            <ChevronRight className="h-4 w-4" />
+            <div className={`flex items-center ${currentStep === 'result' ? 'text-coral' : 'text-charcoal-700'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-2 ${
+                currentStep === 'result' ? 'bg-coral text-white' : 'bg-charcoal-700 text-white'
+              }`}>
+                3
+              </div>
+              Pedido
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Quiz Form */}
-      <section className="py-12">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-2xl">
-            <CardHeader className="text-center pb-8">
-              <CardTitle className="text-2xl font-bold text-charcoal-900">
-                Questionário de Saúde Metabólica
-              </CardTitle>
-              <CardDescription className="text-lg text-charcoal-600">
-                Leva apenas 2 minutos para completar
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="px-8 pb-8">
-              <form className="space-y-12">
-                {questions.map((question, index) => (
-                  <div key={question.id} className="space-y-6">
-                    <div className="text-center">
-                      <h3 className="text-xl font-semibold text-charcoal-900 mb-2">
-                        {question.title}
-                      </h3>
-                      <div className="text-sm text-peach-600">
-                        Pergunta {index + 1} de {questions.length}
+      {/* Main Content */}
+      <div className="mx-auto max-w-4xl px-6 py-16">
+        {currentStep === 'main' && (
+          <div className="text-center">
+            <h1 className="text-4xl lg:text-5xl font-bold text-charcoal-900 mb-8">
+              Com o que podemos te ajudar hoje?
+            </h1>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+              {mainOptions.map((option) => (
+                <button
+                  key={option.id}
+                  onClick={() => handleOptionSelect(option.id)}
+                  className={`${option.color} ${option.hoverColor} text-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group`}
+                >
+                  <div className="flex flex-col items-center space-y-4">
+                    <div className="text-white group-hover:scale-110 transition-transform duration-300">
+                      {option.icon}
+                    </div>
+                    <h3 className="text-xl font-bold uppercase">
+                      {option.title}
+                    </h3>
+                    <p className="text-white/90 text-sm">
+                      {option.description}
+                    </p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {currentStep === 'questions' && selectedOption && (
+          <div className="text-center">
+            <button
+              onClick={handleBackToMain}
+              className="mb-8 text-charcoal-700 hover:text-coral transition-colors duration-300 flex items-center mx-auto"
+            >
+              <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
+              Voltar
+            </button>
+            
+            <h1 className="text-4xl lg:text-5xl font-bold text-charcoal-900 mb-8">
+              {mainOptions.find(opt => opt.id === selectedOption)?.title}
+            </h1>
+            
+            <div className="space-y-6">
+              {(() => {
+                const questions = subQuestions[selectedOption as keyof typeof subQuestions]
+                const currentQuestion = questions[currentQuestionIndex]
+                
+                return (
+                  <div className="space-y-6">
+                    <div className="text-center mb-8">
+                      <div className="text-sm text-coral font-semibold mb-2">
+                        Pergunta {currentQuestionIndex + 1} de {questions.length}
                       </div>
+                      <h2 className="text-2xl font-bold text-charcoal-900 mb-6">
+                        {currentQuestion.question}
+                      </h2>
                     </div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {question.options.map((option) => (
-                        <label
-                          key={option.value}
-                          className="relative cursor-pointer group"
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {currentQuestion.options.map((option, optIndex) => (
+                        <button
+                          key={optIndex}
+                          onClick={() => handleAnswerSelect(option)}
+                          className="bg-coral hover:bg-coral/90 text-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group"
                         >
-                          <input
-                            type={question.multiple ? "checkbox" : "radio"}
-                            name={question.id}
-                            value={option.value}
-                            className="sr-only"
-                          />
-                          <div className="p-6 rounded-2xl border-2 border-champagne-200 bg-champagne-50 hover:border-peach-300 hover:bg-peach-50 transition-all duration-300 group-hover:shadow-lg">
-                            <div className="flex items-center space-x-3">
-                              {option.icon && (
-                                <div className="text-peach-600">
-                                  {option.icon}
-                                </div>
-                              )}
-                              <span className="font-medium text-charcoal-800">
-                                {option.label}
-                              </span>
-                            </div>
+                          <div className="text-center">
+                            <span className="text-lg font-semibold uppercase">
+                              {option}
+                            </span>
                           </div>
-                        </label>
+                        </button>
                       ))}
                     </div>
+                    
+                    {currentQuestionIndex > 0 && (
+                      <div className="text-center mt-8">
+                        <button
+                          onClick={handlePreviousQuestion}
+                          className="text-charcoal-700 hover:text-coral transition-colors duration-300"
+                        >
+                          ← Pergunta anterior
+                        </button>
+                      </div>
+                    )}
                   </div>
-                ))}
-                
-                <div className="text-center pt-8">
-                  <Button 
-                    type="submit" 
-                    size="lg" 
-                    className="bg-peach-400 hover:bg-peach-500 text-white px-12 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                  >
-                    Descobrir meu protocolo ideal
-                    <ArrowRight className="ml-3 h-6 w-6" />
-                  </Button>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Results Preview */}
-      <section className="py-20 bg-white/50">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-charcoal-900 mb-4">
-              Protocolos Personalizados
-            </h2>
-            <p className="text-lg text-charcoal-600">
-              Baseados em evidências científicas para seus objetivos específicos
-            </p>
+                )
+              })()}
+            </div>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {Object.entries(protocols).map(([key, protocol]) => (
-              <Card key={key} className="bg-white/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-peach-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <div className="text-peach-700">
-                      {protocol.icon}
+        )}
+
+        {currentStep === 'result' && (
+          <div className="text-center">
+            <div className="mb-8">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-coral rounded-full mb-4">
+                <Heart className="h-8 w-8 text-white" />
+              </div>
+              <h1 className="text-4xl lg:text-5xl font-bold text-charcoal-900 mb-4">
+                Seu Protocolo Personalizado
+              </h1>
+              <p className="text-lg text-charcoal-600 max-w-2xl mx-auto">
+                Baseado nas suas respostas, criamos um plano específico para seus objetivos
+              </p>
+            </div>
+            
+            {(() => {
+              const protocol = getProtocolRecommendation()
+              if (!protocol) return null
+              
+              return (
+                <div className="space-y-8">
+                  <div className="bg-gradient-to-br from-coral to-coral/80 text-white p-8 rounded-3xl shadow-2xl relative overflow-hidden">
+                    {/* Background Pattern */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
+                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-12 -translate-x-12"></div>
+                    
+                    <div className="relative z-10">
+                      <div className="text-center mb-8">
+                        <h2 className="text-3xl font-bold mb-4 uppercase tracking-wide">
+                          {protocol.title}
+                        </h2>
+                        <p className="text-white/90 text-lg leading-relaxed max-w-2xl mx-auto">
+                          {protocol.description}
+                        </p>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border border-white/30">
+                          <div className="flex items-center justify-center mb-3">
+                            <div className="w-8 h-8 bg-white/30 rounded-full flex items-center justify-center mr-3">
+                              <span className="text-white font-bold">⏱</span>
+                            </div>
+                            <h3 className="font-semibold text-lg">Duração</h3>
+                          </div>
+                          <p className="font-bold text-xl">{protocol.duration}</p>
+                        </div>
+                        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border border-white/30">
+                          <div className="flex items-center justify-center mb-3">
+                            <div className="w-8 h-8 bg-white/30 rounded-full flex items-center justify-center mr-3">
+                              <span className="text-white font-bold">💰</span>
+                            </div>
+                            <h3 className="font-semibold text-lg">Investimento</h3>
+                          </div>
+                          <p className="font-bold text-xl">{protocol.price}</p>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border border-white/30">
+                        <h3 className="font-semibold text-lg mb-6 text-center">O que está incluído:</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {protocol.benefits.map((benefit, index) => (
+                            <div key={index} className="flex items-center text-white">
+                              <div className="w-6 h-6 bg-white/30 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                                <span className="text-white font-bold text-sm">✓</span>
+                              </div>
+                              <span className="text-sm">{benefit}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <CardTitle className="text-xl font-bold text-charcoal-900">
-                    {protocol.title}
-                  </CardTitle>
-                  <CardDescription className="text-charcoal-600">
-                    {protocol.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {protocol.benefits.map((benefit, index) => (
-                      <li key={index} className="flex items-center text-charcoal-700">
-                        <CheckCircle className="mr-2 h-4 w-4 text-peach-500" />
-                        {benefit}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
+                </div>
+              )
+            })()}
+            
+            <div className="space-y-6 mt-12">
+              {!showContactForm ? (
+                <>
+                  <div className="relative">
+                    <Button 
+                      onClick={handleScheduleClick}
+                      className="w-full bg-gradient-to-r from-coral to-coral/80 hover:from-coral/90 hover:to-coral/70 text-white px-8 py-6 text-xl font-bold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 border-0"
+                    >
+                      <div className="flex items-center justify-center">
+                        <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-white font-bold">📅</span>
+                        </div>
+                        Agendar Consulta Gratuita
+                        <ArrowRight className="ml-3 h-6 w-6" />
+                      </div>
+                    </Button>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-coral to-coral/80 rounded-2xl blur opacity-30 -z-10"></div>
+                  </div>
+                </>
+              ) : (
+                <div className="bg-gradient-to-br from-coral to-coral/80 text-white rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+                  {/* Background Pattern */}
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-12 translate-x-12"></div>
+                  <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-8 -translate-x-8"></div>
+                  
+                  <div className="relative z-10">
+                    <div className="text-center mb-8">
+                      <div className="inline-flex items-center justify-center w-12 h-12 bg-white/20 rounded-full mb-4">
+                        <span className="text-white font-bold text-xl">📝</span>
+                      </div>
+                      <h2 className="text-2xl font-bold mb-2 uppercase tracking-wide">
+                        Complete seus dados para agendar
+                      </h2>
+                      <p className="text-white/80 text-sm">
+                        Seus dados serão enviados diretamente para o WhatsApp do Dr. Fernando
+                      </p>
+                    </div>
+                    
+                    <form onSubmit={handleContactSubmit} className="space-y-6">
+                      <div>
+                        <label className="block text-sm font-medium text-white/90 mb-3">
+                          Nome completo *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={userData.name}
+                          onChange={(e) => setUserData(prev => ({ ...prev, name: e.target.value }))}
+                          className="w-full px-4 py-4 border border-white/30 rounded-xl focus:border-white focus:outline-none transition-colors bg-white/10 text-white placeholder-white/70 text-lg"
+                          placeholder="Seu nome completo"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-white/90 mb-3">
+                          Email *
+                        </label>
+                        <input
+                          type="email"
+                          required
+                          value={userData.email}
+                          onChange={(e) => setUserData(prev => ({ ...prev, email: e.target.value }))}
+                          className="w-full px-4 py-4 border border-white/30 rounded-xl focus:border-white focus:outline-none transition-colors bg-white/10 text-white placeholder-white/70 text-lg"
+                          placeholder="seu@email.com"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-white/90 mb-3">
+                          Telefone/WhatsApp *
+                        </label>
+                        <input
+                          type="tel"
+                          required
+                          value={userData.phone}
+                          onChange={(e) => setUserData(prev => ({ ...prev, phone: e.target.value }))}
+                          className="w-full px-4 py-4 border border-white/30 rounded-xl focus:border-white focus:outline-none transition-colors bg-white/10 text-white placeholder-white/70 text-lg"
+                          placeholder="(27) 99689-4540"
+                        />
+                      </div>
+                      <div className="flex gap-4 pt-4">
+                        <Button 
+                          type="submit"
+                          className="flex-1 bg-white text-coral hover:bg-white/90 px-6 py-4 font-bold rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                          <div className="flex items-center justify-center">
+                            <span className="mr-2">📱</span>
+                            Enviar para WhatsApp
+                            <ArrowRight className="ml-2 h-5 w-5" />
+                          </div>
+                        </Button>
+                        <button
+                          type="button"
+                          onClick={() => setShowContactForm(false)}
+                          className="px-6 py-4 text-white/80 hover:text-white transition-colors border border-white/30 rounded-xl hover:bg-white/10"
+                        >
+                          Cancelar
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )}
+              
+              <button
+                onClick={handleBackToMain}
+                className="text-charcoal-700 hover:text-coral transition-colors duration-300"
+              >
+                Fazer novo questionário
+              </button>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 bg-gradient-to-r from-peach-300 to-peach-400">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-6">
-            Pronto para começar sua jornada?
-          </h2>
-          <p className="text-xl text-white/90 mb-8">
-            Agende sua consulta e receba um protocolo personalizado baseado no seu perfil
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-white text-peach-600 hover:bg-champagne-50 px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <Link href="/quiz">
-                Fazer o questionário
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="border-2 border-white text-white hover:bg-white hover:text-peach-600 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105">
-              <Link href="https://wa.me/5527999669050?text=Olá! Gostaria de agendar uma consulta.">
-                Falar com o Dr. Fernando
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+        )}
+      </div>
     </div>
   )
 }

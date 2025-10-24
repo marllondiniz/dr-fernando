@@ -81,7 +81,7 @@ export default function AboutPage() {
                 Abordagem baseada em evidências científicas para resultados reais e sustentáveis.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <Button asChild size="lg" className="bg-peach-300 hover:bg-peach-300/90">
+                <Button asChild size="lg" className="bg-coral hover:bg-coral/90">
                   <Link href={whatsappLink('Olá! Gostaria de agendar uma consulta.')}>
                     <Calendar className="mr-2 h-5 w-5" />
                     Agendar consulta
@@ -190,6 +190,88 @@ export default function AboutPage() {
                 </CardHeader>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Clinic Info */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Clínica e Atendimento
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">
+              Escolha a modalidade que melhor se adapta à sua rotina
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Presencial */}
+            <Card className="border-2 border-primary/20">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Phone className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle className="text-2xl text-gray-900">Consulta Presencial</CardTitle>
+                <CardDescription className="text-lg text-gray-600">
+                  Atendimento na clínica com toda infraestrutura necessária
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-center text-gray-600">
+                    <span className="font-semibold mr-2">📍</span>
+                    <span>Vitória, ES</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <span className="font-semibold mr-2">🕒</span>
+                    <span>Segunda a Sexta: 8h às 18h</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <span className="font-semibold mr-2">🏥</span>
+                    <span>Exame físico completo</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <span className="font-semibold mr-2">🔬</span>
+                    <span>Equipamentos médicos disponíveis</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Online */}
+            <Card className="border-2 border-primary/20">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Calendar className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle className="text-2xl text-gray-900">Consulta Online</CardTitle>
+                <CardDescription className="text-lg text-gray-600">
+                  Atendimento via videoconferência com toda comodidade
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-center text-gray-600">
+                    <span className="font-semibold mr-2">💻</span>
+                    <span>Videoconferência segura</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <span className="font-semibold mr-2">🕒</span>
+                    <span>Segunda a Sábado: 7h às 20h</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <span className="font-semibold mr-2">🏠</span>
+                    <span>Sem deslocamento necessário</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <span className="font-semibold mr-2">🔒</span>
+                    <span>Privacidade total em casa</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

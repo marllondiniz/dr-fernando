@@ -18,7 +18,7 @@ import Link from 'next/link'
 
 export const metadata = generateMetadata({
   title: 'Consultas Médicas - Dr. Fernando Del Piero',
-  description: 'Como funcionam as consultas com o Dr. Fernando Del Piero. Processo completo de anamnese, exames e plano personalizado para seus objetivos de saúde.',
+  description: 'Consultas presenciais e online com o Dr. Fernando Del Piero. Processo completo de anamnese, exames e plano personalizado para seus objetivos de saúde.',
   path: '/consultas'
 })
 
@@ -93,8 +93,8 @@ const faqs = [
     answer: 'Os primeiros sinais de melhora geralmente aparecem em 2-4 semanas, mas resultados significativos são observados em 2-3 meses. Cada pessoa responde de forma diferente ao protocolo.'
   },
   {
-    question: 'Preciso fazer consultas presenciais?',
-    answer: 'As consultas são realizadas online via videoconferência, o que permite maior flexibilidade e comodidade. Todo o processo é otimizado para funcionar perfeitamente no formato digital.'
+    question: 'Posso escolher entre consulta presencial e online?',
+    answer: 'Sim! Oferecemos ambas as modalidades. A consulta presencial é realizada na clínica em Vitória/ES, enquanto a online é feita via videoconferência. Ambas oferecem a mesma qualidade de atendimento e você pode escolher a que melhor se adapta à sua rotina.'
   },
   {
     question: 'O que está incluído no acompanhamento?',
@@ -111,6 +111,10 @@ const faqs = [
   {
     question: 'Funciona para qualquer idade?',
     answer: 'Sim, os protocolos são adaptados para diferentes faixas etárias. Cada pessoa recebe um plano personalizado considerando sua idade, condição de saúde e objetivos específicos.'
+  },
+  {
+    question: 'Onde fica localizada a clínica?',
+    answer: 'A clínica está localizada em Vitória, ES. Para consultas presenciais, você pode agendar nos horários de segunda a sexta, das 8h às 18h. O endereço completo será fornecido no momento do agendamento.'
   }
 ]
 
@@ -128,20 +132,115 @@ export default function ConsultasPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-              Como Funcionam as Consultas
+              Consultas Presenciais e Online
             </h1>
             <p className="mt-6 text-xl leading-8 text-gray-600 max-w-3xl mx-auto">
+              Escolha a modalidade que melhor se adapta à sua rotina. 
               Processo estruturado em 3 etapas para garantir que você receba o melhor cuidado 
               e os melhores resultados possíveis.
             </p>
             <div className="mt-10">
-              <Button asChild size="lg" className="bg-peach-300 hover:bg-peach-300/90">
+              <Button asChild size="lg" className="bg-coral hover:bg-coral/90">
                 <Link href={whatsappLink('Olá! Gostaria de agendar uma consulta.')}>
                   <Calendar className="mr-2 h-5 w-5" />
                   Agendar consulta
                 </Link>
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Consultation Types */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Escolha sua Modalidade de Atendimento
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">
+              Ambos os formatos oferecem a mesma qualidade de cuidado
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Presencial */}
+            <Card className="border-2 border-primary/20 hover:border-primary/40 transition-colors">
+              <CardHeader className="text-center pb-4">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle className="text-2xl text-gray-900">Consulta Presencial</CardTitle>
+                <CardDescription className="text-lg text-gray-600">
+                  Atendimento na clínica com toda infraestrutura necessária
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-center text-gray-600">
+                    <CheckCircle className="mr-3 h-5 w-5 text-peach-400" />
+                    <span>Exame físico completo</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <CheckCircle className="mr-3 h-5 w-5 text-peach-400" />
+                    <span>Ambiente privativo e confortável</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <CheckCircle className="mr-3 h-5 w-5 text-peach-400" />
+                    <span>Equipamentos médicos disponíveis</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <CheckCircle className="mr-3 h-5 w-5 text-peach-400" />
+                    <span>Horários flexíveis</span>
+                  </div>
+                </div>
+                <div className="pt-4 border-t border-gray-200">
+                  <p className="text-sm text-gray-500 mb-2">
+                    <strong>Localização:</strong> Vitória, ES<br />
+                    <strong>Horário:</strong> Segunda a Sexta, 8h às 18h
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Online */}
+            <Card className="border-2 border-primary/20 hover:border-primary/40 transition-colors">
+              <CardHeader className="text-center pb-4">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Phone className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle className="text-2xl text-gray-900">Consulta Online</CardTitle>
+                <CardDescription className="text-lg text-gray-600">
+                  Atendimento via videoconferência com toda comodidade
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-center text-gray-600">
+                    <CheckCircle className="mr-3 h-5 w-5 text-peach-400" />
+                    <span>Sem deslocamento necessário</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <CheckCircle className="mr-3 h-5 w-5 text-peach-400" />
+                    <span>Horários ainda mais flexíveis</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <CheckCircle className="mr-3 h-5 w-5 text-peach-400" />
+                    <span>Privacidade total em casa</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <CheckCircle className="mr-3 h-5 w-5 text-peach-400" />
+                    <span>Mesma qualidade de atendimento</span>
+                  </div>
+                </div>
+                <div className="pt-4 border-t border-gray-200">
+                  <p className="text-sm text-gray-500 mb-2">
+                    <strong>Plataforma:</strong> Videoconferência segura<br />
+                    <strong>Horário:</strong> Segunda a Sábado, 7h às 20h
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

@@ -101,7 +101,7 @@ export default function DepoimentosPage() {
               protocolos baseados em evidências científicas.
             </p>
             <div className="mt-10">
-              <Button asChild size="lg" className="bg-peach-300 hover:bg-peach-300/90">
+              <Button asChild size="lg" className="bg-coral hover:bg-coral/90">
                 <Link href={whatsappLink('Olá! Gostaria de agendar uma consulta.')}>
                   <Calendar className="mr-2 h-5 w-5" />
                   Agendar consulta

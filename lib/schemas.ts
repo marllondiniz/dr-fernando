@@ -19,7 +19,7 @@ export function PersonSchema() {
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": process.env.NEXT_PUBLIC_WHATSAPP || "+5527999669050",
+      "telephone": process.env.NEXT_PUBLIC_WHATSAPP || "+5527996894540",
       "contactType": "customer service",
       "availableLanguage": "Portuguese"
     },
@@ -66,7 +66,7 @@ export function MedicalOrganizationSchema() {
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": process.env.NEXT_PUBLIC_WHATSAPP || "+5527999669050",
+      "telephone": process.env.NEXT_PUBLIC_WHATSAPP || "+5527996894540",
       "contactType": "customer service",
       "availableLanguage": "Portuguese"
     },

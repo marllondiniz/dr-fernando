@@ -87,6 +87,14 @@ const config: Config = {
           800: "#333333",
           900: "#232323", // Texto escuro principal
         },
+        // Cor personalizada para o botão
+        coral: {
+          DEFAULT: "rgb(255, 141, 125)", // Coral/rosa claro
+        },
+        // Cor teal para o header
+        teal: {
+          800: "#2D5A5A", // Teal escuro para texto
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
