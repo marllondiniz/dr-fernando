@@ -2,10 +2,11 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { whatsappLink } from '@/lib/utils'
-import { Calendar, Clock, ArrowRight, MessageCircle } from 'lucide-react'
+import { Calendar, Clock, ArrowRight } from 'lucide-react'
 
 const blogPosts = [
   {
@@ -82,13 +83,13 @@ export default function ConteudoPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 to-peach-200/5">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-primary/5 to-peach-200/5">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
               Blog
             </h1>
-            <p className="mt-6 text-xl leading-8 text-gray-600 max-w-3xl mx-auto">
+            <p className="mt-4 sm:mt-6 text-lg sm:text-xl leading-7 sm:leading-8 text-gray-600 max-w-3xl mx-auto px-4">
               Artigos baseados em evidências científicas sobre metabolismo, emagrecimento, 
               menopausa e jejum hormonal. Conteúdo educativo para sua jornada de saúde.
             </p>
@@ -97,14 +98,14 @@ export default function ConteudoPage() {
       </section>
 
       {/* Categories */}
-      <section className="py-12 bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4">
+      <section className="py-8 sm:py-12 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
             {categories.map((category, index) => (
               <Button
                 key={index}
                 variant={activeFilter === category.filter ? "default" : "outline"}
-                className="rounded-full"
+                className="rounded-full text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-2"
                 onClick={() => setActiveFilter(category.filter)}
               >
                 {category.name} ({category.count})
@@ -115,35 +116,37 @@ export default function ConteudoPage() {
       </section>
 
       {/* Blog Posts */}
-      <section className="py-20 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {filteredPosts.map((post, index) => (
               <Card key={index} className="overflow-hidden hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1">
                 <div className="aspect-video relative overflow-hidden">
-                  <img
+                  <Image
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    loading={index < 3 ? "eager" : "lazy"}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-300"
+                    priority={index < 3}
+                    unoptimized={true}
                   />
                 </div>
-                <CardHeader>
-                  <div className="flex items-center space-x-4 text-sm text-gray-500 mb-2">
+                <CardHeader className="p-4 sm:p-6">
+                  <div className="flex items-center space-x-3 sm:space-x-4 text-xs sm:text-sm text-gray-500 mb-2">
                     <div className="flex items-center">
-                      <Calendar className="mr-1 h-4 w-4" />
-                      {new Date(post.date).toLocaleDateString('pt-BR')}
+                      <Calendar className="mr-1 h-3 w-3 sm:h-4 sm:w-4" />
+                      <span className="text-xs sm:text-sm">{new Date(post.date).toLocaleDateString('pt-BR')}</span>
                     </div>
                     <div className="flex items-center">
-                      <Clock className="mr-1 h-4 w-4" />
-                      {post.readTime}
+                      <Clock className="mr-1 h-3 w-3 sm:h-4 sm:w-4" />
+                      <span className="text-xs sm:text-sm">{post.readTime}</span>
                     </div>
                   </div>
-                  <CardTitle className="text-xl line-clamp-2">{post.title}</CardTitle>
-                  <CardDescription className="line-clamp-3">{post.excerpt}</CardDescription>
+                  <CardTitle className="text-lg sm:text-xl line-clamp-2 leading-tight">{post.title}</CardTitle>
+                  <CardDescription className="line-clamp-3 text-sm sm:text-base leading-relaxed">{post.excerpt}</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2 mb-4">
+                <CardContent className="p-4 sm:p-6 pt-0">
+                  <div className="flex flex-wrap gap-1 sm:gap-2 mb-4">
                     {post.tags.map((tag, tagIndex) => (
                       <span
                         key={tagIndex}
@@ -153,7 +156,7 @@ export default function ConteudoPage() {
                       </span>
                     ))}
                   </div>
-                  <Button asChild variant="outline" size="sm" className="w-full border-primary text-primary hover:bg-primary hover:text-white">
+                  <Button asChild variant="outline" size="sm" className="w-full border-primary text-primary hover:bg-primary hover:text-white text-sm">
                     <Link href={`/conteudo/${post.slug}`}>
                       Ler artigo
                       <ArrowRight className="ml-2 h-4 w-4" />
@@ -163,29 +166,6 @@ export default function ConteudoPage() {
               </Card>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Newsletter CTA */}
-      <section className="py-20 bg-white">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <Card className="bg-gradient-to-r from-primary to-peach-300 text-white">
-            <CardContent className="p-8 text-center">
-              <h2 className="text-3xl font-bold mb-4">
-                Quer receber mais conteúdo?
-              </h2>
-              <p className="text-xl mb-6 opacity-90">
-                Receba artigos exclusivos e dicas científicas diretamente no seu WhatsApp
-              </p>
-              <Button asChild size="lg" variant="secondary">
-
-                <Link href={whatsappLink('Olá! Gostaria de receber conteúdo do blog sobre saúde e metabolismo.')}>
-                  <MessageCircle className="mr-2 h-5 w-5" />
-                  Receber Conteúdo
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
         </div>
       </section>
 

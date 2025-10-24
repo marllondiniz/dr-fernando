@@ -106,13 +106,33 @@ export default function HomePage() {
                 Sem filas, sem burocracia, sem protocolos prontos.<br />
                 Aqui, ciência e tecnologia se unem para criar um tratamento totalmente personalizado e monitorado do início ao fim.
               </p>
-              <div className="flex justify-center lg:justify-start">
+              <div className="flex justify-center lg:justify-start mb-8 sm:mb-12">
                 <Button asChild size="lg" className="bg-coral hover:bg-coral/90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 w-full sm:w-auto">
                 <Link href="/quiz">
                   Começar agora
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
+              </div>
+              
+              {/* Stats Section */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-2xl mx-auto lg:mx-0">
+                <div className="text-center lg:text-left">
+                  <div className="text-2xl sm:text-3xl font-bold text-coral mb-1">2000+</div>
+                  <div className="text-sm sm:text-base text-charcoal-600">Clientes Atendidos</div>
+                </div>
+                <div className="text-center lg:text-left">
+                  <div className="text-2xl sm:text-3xl font-bold text-coral mb-1">95%</div>
+                  <div className="text-sm sm:text-base text-charcoal-600">Taxa de Sucesso</div>
+                </div>
+                <div className="text-center lg:text-left">
+                  <div className="text-2xl sm:text-3xl font-bold text-coral mb-1">-15kg</div>
+                  <div className="text-sm sm:text-base text-charcoal-600">Perda Média</div>
+                </div>
+                <div className="text-center lg:text-left">
+                  <div className="text-2xl sm:text-3xl font-bold text-coral mb-1">5</div>
+                  <div className="text-sm sm:text-base text-charcoal-600">Anos de Experiência</div>
+                </div>
               </div>
             </div>
           </div>
@@ -208,8 +228,14 @@ export default function HomePage() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
-              <div className="aspect-video bg-gradient-to-br from-coral/20 to-coral/10 flex items-center justify-center">
-                <TrendingDown className="h-16 w-16 text-coral" />
+              <div className="aspect-video relative overflow-hidden">
+                <Image
+                  src="/images/emagrecimento-inteligente.avif"
+                  alt="Emagrecimento Inteligente"
+                  fill
+                  className="object-cover"
+                  unoptimized={true}
+                />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-charcoal-900 mb-3">
@@ -317,11 +343,13 @@ export default function HomePage() {
             {blogPosts.map((post, index) => (
               <div key={index} className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
                 <div className="aspect-video relative overflow-hidden">
-                  <img
+                  <Image
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    loading={index < 3 ? "eager" : "lazy"}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-300"
+                    priority={index < 3}
+                    unoptimized={true}
                   />
                 </div>
                 <div className="p-6">

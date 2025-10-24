@@ -94,7 +94,7 @@ export default function MetabolismoLentoPost() {
             <p>
               O metabolismo é o conjunto de processos químicos que ocorrem no seu corpo para manter a vida. 
               Ele inclui a conversão de alimentos em energia, a síntese de proteínas e a eliminação de resíduos. 
-              Quando falamos de "metabolismo lento", geralmente nos referimos à taxa metabólica basal reduzida.
+              Quando falamos de &quot;metabolismo lento&quot;, geralmente nos referimos à taxa metabólica basal reduzida.
             </p>
             
             <p>
@@ -124,7 +124,7 @@ export default function MetabolismoLentoPost() {
 
             <h3>4. Restrição Calórica Excessiva</h3>
             <p>
-              Dietas muito restritivas fazem o corpo entrar em "modo de economia", 
+              Dietas muito restritivas fazem o corpo entrar em &quot;modo de economia&quot;, 
               reduzindo o metabolismo para preservar energia.
             </p>
 
