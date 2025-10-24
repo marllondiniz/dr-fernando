@@ -259,7 +259,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="text-charcoal-700 mb-4 leading-relaxed">
-                  "{testimonial.content}"
+                  &ldquo;{testimonial.content}&rdquo;
                 </p>
                 <div className="text-sm text-charcoal-600">
                   <div className="font-semibold">{testimonial.name}</div>
