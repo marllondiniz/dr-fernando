@@ -7,8 +7,8 @@ import { whatsappLink, generateMetadata } from '@/lib/utils'
 import { Calendar, Clock, ArrowLeft, MessageCircle, ArrowRight } from 'lucide-react'
 
 export const metadata = generateMetadata({
-  title: 'Jejum Metabólico: Guia Completo para Iniciantes - Dr. Fernando Del Piero',
-  description: 'Aprenda como implementar o jejum de forma segura e eficaz para acelerar seus resultados. Tudo que você precisa saber para começar com o jejum metabólico.',
+  title: 'Jejum Hormonal: Guia Completo para Iniciantes - Dr. Fernando Del Piero',
+  description: 'Aprenda como implementar o jejum de forma segura e eficaz para acelerar seus resultados. Tudo que você precisa saber para começar com o jejum hormonal.',
   path: '/conteudo/jejum-metabolico-guia-completo'
 })
 
@@ -16,75 +16,78 @@ const relatedPosts = [
   {
     title: 'Exercício em Jejum: Benefícios e Precauções',
     slug: 'exercicio-jejum-beneficios',
-    image: '/images/blog/exercicio-jejum.jpg',
+    image: '/images/blog/iStock-1296099228-1.jpg',
     readTime: '8 min'
   },
   {
     title: 'Metabolismo Lento: Soluções Baseadas em Ciência',
     slug: 'metabolismo-lento-solucoes',
-    image: '/images/blog/metabolismo-lento.jpg',
+    image: '/images/blog/metabolismo.webp',
     readTime: '9 min'
   },
   {
     title: 'Hormônios e Emagrecimento: A Conexão Essencial',
     slug: 'hormonios-emagrecimento',
-    image: '/images/blog/hormonios.jpg',
+    image: '/images/blog/Emagrecimento-feminino-e-hormonios.jpg',
     readTime: '10 min'
   }
 ]
 
 export default function JejumMetabolicoPost() {
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <section className="py-12 bg-white border-b">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <Button asChild variant="outline" className="mb-8 border-primary text-primary hover:bg-primary hover:text-white">
-            <Link href="/conteudo">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Voltar ao blog
-            </Link>
-          </Button>
-          
-          <div className="flex items-center space-x-4 text-sm text-gray-500 mb-6">
-            <div className="flex items-center">
-              <Calendar className="mr-1 h-4 w-4" />
-              15 de Janeiro de 2024
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-blue-50 to-indigo-100 py-16">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="flex items-center space-x-4 text-sm text-gray-600 mb-4">
+                <span className="flex items-center">
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                  </svg>
+                  15/01/2024
+                </span>
+                <span className="flex items-center">
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                  </svg>
+                  8 min de leitura
+                </span>
+              </div>
+              
+              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                Jejum Hormonal: Guia Completo para Iniciantes
+              </h1>
+              
+              <p className="text-xl text-gray-600 mb-8">
+                Aprenda como implementar o jejum de forma segura e eficaz para acelerar seus resultados. 
+                Tudo que você precisa saber para começar com o jejum hormonal.
+              </p>
+              
+              <div className="flex flex-wrap gap-2 mb-8">
+                <span className="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm font-medium">
+                  jejum
+                </span>
+                <span className="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm font-medium">
+                  metabolismo
+                </span>
+                <span className="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm font-medium">
+                  emagrecimento
+                </span>
+              </div>
             </div>
-            <div className="flex items-center">
-              <Clock className="mr-1 h-4 w-4" />
-              8 min de leitura
+            
+            <div className="relative">
+              <Image
+                src="/images/como-funciona-o-jejum-intermitente-guia-completo-para-iniciantes-e-praticantes-de-atividades-fisicas-1.webp"
+                alt="Jejum Hormonal: Guia Completo"
+                width={600}
+                height={400}
+                className="rounded-lg shadow-lg"
+                priority
+              />
             </div>
-          </div>
-          
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mb-6">
-            Jejum Metabólico: Guia Completo para Iniciantes
-          </h1>
-          
-          <p className="text-xl text-gray-600 mb-8">
-            Aprenda como implementar o jejum de forma segura e eficaz para acelerar seus resultados. 
-            Tudo que você precisa saber para começar com o jejum metabólico.
-          </p>
-          
-          <div className="flex flex-wrap gap-2">
-            <span className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full">jejum</span>
-            <span className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full">metabolismo</span>
-            <span className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full">emagrecimento</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Image */}
-      <section className="py-8 bg-white">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="relative aspect-video rounded-2xl overflow-hidden">
-            <Image
-              src="/images/blog/jejum-guia.jpg"
-              alt="Jejum Metabólico: Guia Completo"
-              fill
-              className="object-cover"
-              priority
-            />
           </div>
         </div>
       </section>
@@ -93,10 +96,10 @@ export default function JejumMetabolicoPost() {
       <section className="py-12 bg-white">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <div className="prose prose-lg max-w-none">
-            <h2>O que é Jejum Metabólico?</h2>
+            <h2>O que é Jejum Hormonal?</h2>
             <p>
-              O jejum metabólico é uma estratégia nutricional que envolve períodos controlados de abstinência de alimentos, 
-              seguidos por janelas de alimentação. Diferente do jejum tradicional, o jejum metabólico é personalizado 
+              O jejum hormonal é uma estratégia nutricional que envolve períodos controlados de abstinência de alimentos, 
+              seguidos por janelas de alimentação. Diferente do jejum tradicional, o jejum hormonal é personalizado 
               para otimizar os processos metabólicos do seu corpo.
             </p>
             
@@ -107,7 +110,7 @@ export default function JejumMetabolicoPost() {
 
             <h2>Benefícios Cientificamente Comprovados</h2>
             <p>
-              Estudos mostram que o jejum metabólico pode trazer diversos benefícios:
+              Estudos mostram que o jejum hormonal pode trazer diversos benefícios:
             </p>
             
             <ul>
@@ -189,78 +192,51 @@ export default function JejumMetabolicoPost() {
 
             <h2>Conclusão</h2>
             <p>
-              O jejum metabólico pode ser uma ferramenta poderosa para acelerar seus resultados, 
+              O jejum hormonal pode ser uma ferramenta poderosa para acelerar seus resultados,  
               mas deve ser implementado com cuidado e supervisão médica. Lembre-se: não existe 
               uma abordagem única que funcione para todos.
             </p>
             
             <p>
-              Se você está interessado em implementar o jejum metabólico de forma segura e eficaz, 
+              Se você está interessado em implementar o jejum hormonal de forma segura e eficaz, 
               considere buscar orientação profissional para um protocolo personalizado.
             </p>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-12 bg-gray-50">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <Card className="bg-gradient-to-r from-primary to-peach-300 text-white">
-            <CardContent className="p-8 text-center">
-              <h2 className="text-2xl font-bold mb-4">
-                Quer implementar o jejum metabólico com segurança?
-              </h2>
-              <p className="text-lg mb-6 opacity-90">
-                Agende uma consulta e receba um protocolo personalizado baseado no seu perfil
-              </p>
-              <Button asChild size="lg" className="bg-peach-300 text-white hover:bg-peach-300/90 hover:shadow-lg hover:shadow-peach-300/25">
-                <Link href={whatsappLink('Olá! Gostaria de agendar uma consulta sobre jejum metabólico.')}>
-                  <MessageCircle className="mr-2 h-5 w-5" />
-                  Agendar Consulta
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
       {/* Related Posts */}
-      <section className="py-20 bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Artigos Relacionados
-            </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Continue aprendendo sobre metabolismo e saúde
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="py-16 bg-gray-50">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
+            Artigos Relacionados
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {relatedPosts.map((post, index) => (
-              <Card key={index} className="overflow-hidden hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1">
-                <div className="aspect-video relative overflow-hidden">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
-                    {post.title}
-                  </h3>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500">{post.readTime}</span>
-                    <Button asChild variant="outline" size="sm">
-                      <Link href={`/conteudo/${post.slug}`}>
-                        Ler
-                        <ArrowRight className="ml-1 h-3 w-3" />
-                      </Link>
-                    </Button>
+              <Link key={index} href={`/conteudo/${post.slug}`} className="group">
+                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                  <div className="relative h-48">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
-                </CardContent>
-              </Card>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                      {post.title}
+                    </h3>
+                    <div className="flex items-center text-sm text-gray-500">
+                      <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                      </svg>
+                      {post.readTime}
+                    </div>
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
         </div>

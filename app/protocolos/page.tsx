@@ -13,8 +13,7 @@ import {
   CheckCircle,
   ArrowRight,
   Calendar,
-  Phone,
-  Play
+  Phone
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -47,7 +46,6 @@ const jejumHormonal = {
     'Monitoramento de marcadores hormonais',
     'Acompanhamento médico especializado'
   ],
-  videoUrl: 'https://www.youtube.com/watch?v=7pdKn_5r8Is'
 }
 
 const saudeHormonal = {
@@ -200,25 +198,6 @@ export default function ProtocolosPage() {
                   </Link>
                 </Button>
                 
-                {/* Vídeo do YouTube */}
-                <div className="mt-6">
-                  <h4 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    <Play className="mr-2 h-5 w-5 text-primary" />
-                    Vídeo Explicativo
-                  </h4>
-                  <div className="aspect-video rounded-2xl overflow-hidden shadow-xl">
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src="https://www.youtube.com/embed/7pdKn_5r8Is"
-                      title="Jejum Hormonal - Dr. Fernando Del Piero"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    ></iframe>
-                  </div>
-                </div>
               </div>
             </div>
             <div className="relative">

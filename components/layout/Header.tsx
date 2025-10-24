@@ -7,7 +7,7 @@ import { Menu, X, ChevronDown } from 'lucide-react'
 import { whatsappLink } from '@/lib/utils'
 
 const navigation = [
-  { name: 'TRATAMENTOS', href: '/protocolos', hasDropdown: true },
+  { name: 'SERVIÇOS', href: '/protocolos', hasDropdown: true },
   { name: 'BLOG', href: '/conteudo' },
   { name: 'QUEM SOMOS', href: '/sobre' },
 ]

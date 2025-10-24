@@ -27,7 +27,7 @@ const testimonials = [
   {
     name: 'Carlos Santos',
     location: 'Vila Velha, ES',
-    content: 'O jejum metabólico mudou minha vida. Mais energia, melhor foco e resultados que nunca consegui antes. Dr. Fernando é excepcional!',
+    content: 'O jejum hormonal mudou minha vida. Mais energia, melhor foco e resultados que nunca consegui antes. Dr. Fernando é excepcional!',
     rating: 5
   },
   {

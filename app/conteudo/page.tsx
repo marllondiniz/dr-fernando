@@ -1,23 +1,18 @@
-import type { Metadata } from 'next'
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { whatsappLink, generateMetadata } from '@/lib/utils'
+import { whatsappLink } from '@/lib/utils'
 import { Calendar, Clock, ArrowRight, MessageCircle } from 'lucide-react'
-
-export const metadata = generateMetadata({
-  title: 'Conteúdo Científico - Dr. Fernando Del Piero',
-  description: 'Artigos baseados em evidências científicas sobre metabolismo, emagrecimento, menopausa e jejum metabólico. Conteúdo educativo para sua jornada de saúde.',
-  path: '/conteudo'
-})
 
 const blogPosts = [
   {
     slug: 'jejum-metabolico-guia-completo',
-    title: 'Jejum Metabólico: Guia Completo para Iniciantes',
+    title: 'Jejum Hormonal: Guia Completo para Iniciantes',
     excerpt: 'Aprenda como implementar o jejum de forma segura e eficaz para acelerar seus resultados. Tudo que você precisa saber para começar.',
-    image: '/images/blog/jejum-guia.jpg',
+    image: '/images/como-funciona-o-jejum-intermitente-guia-completo-para-iniciantes-e-praticantes-de-atividades-fisicas-1.webp',
     readTime: '8 min',
     date: '2024-01-15',
     tags: ['jejum', 'metabolismo', 'emagrecimento']
@@ -26,7 +21,7 @@ const blogPosts = [
     slug: 'menopausa-sintomas-naturais',
     title: 'Menopausa: Como Controlar os Sintomas Naturalmente',
     excerpt: 'Estratégias baseadas em evidências para uma menopausa mais tranquila e saudável. Controle os sintomas sem medicamentos.',
-    image: '/images/blog/menopausa.jpg',
+    image: '/images/meno-pausa.webp',
     readTime: '6 min',
     date: '2024-01-10',
     tags: ['menopausa', 'saúde da mulher', 'hormônios']
@@ -35,7 +30,7 @@ const blogPosts = [
     slug: 'por-que-nao-consegue-emagrecer',
     title: 'Por que Você Não Consegue Emagrecer?',
     excerpt: 'Os 5 principais motivos pelos quais muitas pessoas não conseguem perder peso de forma sustentável. Descubra o que pode estar impedindo seus resultados.',
-    image: '/images/blog/emagrecimento.jpg',
+    image: '/images/por-que-nao-consegue-emagrecer.webp',
     readTime: '7 min',
     date: '2024-01-05',
     tags: ['emagrecimento', 'metabolismo', 'nutrição']
@@ -44,7 +39,7 @@ const blogPosts = [
     slug: 'metabolismo-lento-solucoes',
     title: 'Metabolismo Lento: Soluções Baseadas em Ciência',
     excerpt: 'Entenda as causas do metabolismo lento e aprenda estratégias comprovadas para acelerá-lo naturalmente.',
-    image: '/images/blog/metabolismo-lento.jpg',
+    image: '/images/blog/metabolismo.webp',
     readTime: '9 min',
     date: '2024-01-01',
     tags: ['metabolismo', 'ciência', 'nutrição']
@@ -53,7 +48,7 @@ const blogPosts = [
     slug: 'hormonios-emagrecimento',
     title: 'Hormônios e Emagrecimento: A Conexão Essencial',
     excerpt: 'Como os hormônios influenciam o peso e quais estratégias usar para equilibrá-los e acelerar o emagrecimento.',
-    image: '/images/blog/hormonios.jpg',
+    image: '/images/blog/hormonios-emagrecimento.jpg',
     readTime: '10 min',
     date: '2023-12-28',
     tags: ['hormônios', 'emagrecimento', 'ciência']
@@ -70,14 +65,20 @@ const blogPosts = [
 ]
 
 const categories = [
-  { name: 'Todos', count: blogPosts.length, active: true },
-  { name: 'Jejum', count: blogPosts.filter(post => post.tags.includes('jejum')).length },
-  { name: 'Menopausa', count: blogPosts.filter(post => post.tags.includes('menopausa')).length },
-  { name: 'Emagrecimento', count: blogPosts.filter(post => post.tags.includes('emagrecimento')).length },
-  { name: 'Metabolismo', count: blogPosts.filter(post => post.tags.includes('metabolismo')).length }
+  { name: 'Todos', count: blogPosts.length, filter: 'all' },
+  { name: 'Jejum', count: blogPosts.filter(post => post.tags.includes('jejum')).length, filter: 'jejum' },
+  { name: 'Menopausa', count: blogPosts.filter(post => post.tags.includes('menopausa')).length, filter: 'menopausa' },
+  { name: 'Emagrecimento', count: blogPosts.filter(post => post.tags.includes('emagrecimento')).length, filter: 'emagrecimento' },
+  { name: 'Metabolismo', count: blogPosts.filter(post => post.tags.includes('metabolismo')).length, filter: 'metabolismo' }
 ]
 
 export default function ConteudoPage() {
+  const [activeFilter, setActiveFilter] = useState('all')
+
+  const filteredPosts = activeFilter === 'all' 
+    ? blogPosts 
+    : blogPosts.filter(post => post.tags.includes(activeFilter))
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -85,11 +86,11 @@ export default function ConteudoPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-              Conteúdo Científico
+              Blog
             </h1>
             <p className="mt-6 text-xl leading-8 text-gray-600 max-w-3xl mx-auto">
               Artigos baseados em evidências científicas sobre metabolismo, emagrecimento, 
-              menopausa e jejum metabólico. Conteúdo educativo para sua jornada de saúde.
+              menopausa e jejum hormonal. Conteúdo educativo para sua jornada de saúde.
             </p>
           </div>
         </div>
@@ -102,8 +103,9 @@ export default function ConteudoPage() {
             {categories.map((category, index) => (
               <Button
                 key={index}
-                variant={category.active ? "default" : "outline"}
+                variant={activeFilter === category.filter ? "default" : "outline"}
                 className="rounded-full"
+                onClick={() => setActiveFilter(category.filter)}
               >
                 {category.name} ({category.count})
               </Button>
@@ -116,14 +118,14 @@ export default function ConteudoPage() {
       <section className="py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
+            {filteredPosts.map((post, index) => (
               <Card key={index} className="overflow-hidden hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1">
                 <div className="aspect-video relative overflow-hidden">
-                  <Image
+                  <img
                     src={post.image}
                     alt={post.title}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    loading={index < 3 ? "eager" : "lazy"}
                   />
                 </div>
                 <CardHeader>
@@ -176,7 +178,8 @@ export default function ConteudoPage() {
                 Receba artigos exclusivos e dicas científicas diretamente no seu WhatsApp
               </p>
               <Button asChild size="lg" variant="secondary">
-                <Link href={whatsappLink('Olá! Gostaria de receber conteúdo científico sobre saúde e metabolismo.')}>
+
+                <Link href={whatsappLink('Olá! Gostaria de receber conteúdo do blog sobre saúde e metabolismo.')}>
                   <MessageCircle className="mr-2 h-5 w-5" />
                   Receber Conteúdo
                 </Link>
