@@ -87,7 +87,7 @@ export default function HomePage() {
     <div className="min-h-screen">
       {/* Hero Section - Manual Style */}
       <section 
-        className="relative pt-8 pb-12 sm:pt-12 sm:pb-16 md:pt-16 md:pb-20 lg:pt-20 lg:pb-24"
+        className="relative pt-4 pb-12 sm:pt-12 sm:pb-16 md:pt-16 md:pb-20 lg:pt-20 lg:pb-24 mobile-bg-center"
         style={{
           backgroundImage: 'url(/images/fundo-trans.png)',
           backgroundSize: 'auto 100%',
@@ -97,7 +97,7 @@ export default function HomePage() {
         }}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:pl-8 xl:pl-12">
-          <div className="flex items-start pt-16 sm:pt-20 md:pt-24 lg:pt-28 min-h-[70vh]">
+          <div className="flex items-start pt-8 sm:pt-20 md:pt-24 lg:pt-28 min-h-[70vh]">
             <div className="w-full lg:w-2/3 xl:w-1/2">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-charcoal-900 mb-4 sm:mb-6 text-center lg:text-left">
                 Saúde Metabólica do jeito que você precisa.

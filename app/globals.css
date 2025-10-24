@@ -59,3 +59,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Mobile background positioning */
+@media (max-width: 640px) {
+  .mobile-bg-center {
+    background-position: right bottom !important;
+    background-size: auto 60% !important;
+  }
+}

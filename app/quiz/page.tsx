@@ -302,64 +302,69 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
     <div className="min-h-screen bg-white">
       {/* Progress Bar */}
       <div className="bg-champagne-100">
-        <div className="mx-auto max-w-4xl px-6 py-4">
-          <div className="flex items-center justify-center space-x-8 text-sm font-semibold text-charcoal-700 uppercase">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex items-center justify-center space-x-4 sm:space-x-6 lg:space-x-8 text-xs sm:text-sm font-semibold text-charcoal-700 uppercase">
             <div className={`flex items-center ${currentStep === 'main' ? 'text-coral' : 'text-charcoal-700'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-2 ${
+              <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center mr-1 sm:mr-2 ${
                 currentStep === 'main' ? 'bg-coral text-white' : 'bg-charcoal-700 text-white'
               }`}>
                 1
               </div>
-              Questionário
+              <span className="hidden sm:inline">Questionário</span>
+              <span className="sm:hidden">Quiz</span>
             </div>
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
             <div className={`flex items-center ${currentStep === 'questions' ? 'text-coral' : 'text-charcoal-700'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-2 ${
+              <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center mr-1 sm:mr-2 ${
                 currentStep === 'questions' ? 'bg-coral text-white' : 'bg-charcoal-700 text-white'
               }`}>
                 2
               </div>
-              Tratamento
+              <span className="hidden sm:inline">Tratamento</span>
+              <span className="sm:hidden">Trat.</span>
             </div>
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
             <div className={`flex items-center ${currentStep === 'result' ? 'text-coral' : 'text-charcoal-700'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-2 ${
+              <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center mr-1 sm:mr-2 ${
                 currentStep === 'result' ? 'bg-coral text-white' : 'bg-charcoal-700 text-white'
               }`}>
                 3
               </div>
-              Pedido
+              <span className="hidden sm:inline">Pedido</span>
+              <span className="sm:hidden">Pedido</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="mx-auto max-w-4xl px-6 py-16">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 py-8 sm:py-12 lg:py-16">
         {currentStep === 'main' && (
           <div className="text-center">
-            <h1 className="text-4xl lg:text-5xl font-bold text-charcoal-900 mb-8">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal-900 mb-6 sm:mb-8">
               Com o que podemos te ajudar hoje?
             </h1>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
               {mainOptions.map((option) => (
                 <button
                   key={option.id}
                   onClick={() => handleOptionSelect(option.id)}
-                  className={`${option.color} ${option.hoverColor} text-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group`}
+                  className={`${option.color} ${option.hoverColor} text-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group`}
                 >
-                  <div className="flex flex-col items-center space-y-4">
-                    <div className="text-white group-hover:scale-110 transition-transform duration-300">
-                      {option.icon}
+                    <div className="flex flex-col items-center space-y-3 sm:space-y-4">
+                      <div className="text-white group-hover:scale-110 transition-transform duration-300">
+                        <div className="h-6 w-6 sm:h-8 sm:w-8">
+                          {option.icon}
+                        </div>
+                      </div>
+                      <h3 className="text-lg sm:text-xl font-bold uppercase text-center">
+                        {option.title}
+                      </h3>
+                      <p className="text-white/90 text-xs sm:text-sm text-center">
+                        {option.description}
+                      </p>
                     </div>
-                    <h3 className="text-xl font-bold uppercase">
-                      {option.title}
-                    </h3>
-                    <p className="text-white/90 text-sm">
-                      {option.description}
-                    </p>
-                  </div>
                 </button>
               ))}
             </div>
@@ -376,7 +381,7 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
               Voltar
             </button>
             
-            <h1 className="text-4xl lg:text-5xl font-bold text-charcoal-900 mb-8">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal-900 mb-6 sm:mb-8">
               {mainOptions.find(opt => opt.id === selectedOption)?.title}
             </h1>
             
@@ -391,20 +396,20 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
                       <div className="text-sm text-coral font-semibold mb-2">
                         Pergunta {currentQuestionIndex + 1} de {questions.length}
                       </div>
-                      <h2 className="text-2xl font-bold text-charcoal-900 mb-6">
+                      <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-charcoal-900 mb-4 sm:mb-6">
                         {currentQuestion.question}
                       </h2>
                     </div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                       {currentQuestion.options.map((option, optIndex) => (
                         <button
                           key={optIndex}
                           onClick={() => handleAnswerSelect(option)}
-                          className="bg-coral hover:bg-coral/90 text-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group"
+                          className="bg-coral hover:bg-coral/90 text-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group"
                         >
                           <div className="text-center">
-                            <span className="text-lg font-semibold uppercase">
+                            <span className="text-sm sm:text-lg font-semibold uppercase">
                               {option}
                             </span>
                           </div>
@@ -435,10 +440,10 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
               <div className="inline-flex items-center justify-center w-16 h-16 bg-coral rounded-full mb-4">
                 <Heart className="h-8 w-8 text-white" />
               </div>
-              <h1 className="text-4xl lg:text-5xl font-bold text-charcoal-900 mb-4">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal-900 mb-3 sm:mb-4">
                 Seu Protocolo Personalizado
               </h1>
-              <p className="text-lg text-charcoal-600 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg text-charcoal-600 max-w-2xl mx-auto">
                 Baseado nas suas respostas, criamos um plano específico para seus objetivos
               </p>
             </div>
@@ -449,51 +454,51 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
               
               return (
                 <div className="space-y-8">
-                  <div className="bg-gradient-to-br from-coral to-coral/80 text-white p-8 rounded-3xl shadow-2xl relative overflow-hidden">
+                  <div className="bg-gradient-to-br from-coral to-coral/80 text-white p-6 sm:p-8 rounded-3xl shadow-2xl relative overflow-hidden">
                     {/* Background Pattern */}
                     <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
                     <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-12 -translate-x-12"></div>
                     
                     <div className="relative z-10">
                       <div className="text-center mb-8">
-                        <h2 className="text-3xl font-bold mb-4 uppercase tracking-wide">
+                        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 uppercase tracking-wide">
                           {protocol.title}
                         </h2>
-                        <p className="text-white/90 text-lg leading-relaxed max-w-2xl mx-auto">
+                        <p className="text-white/90 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
                           {protocol.description}
                         </p>
                       </div>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border border-white/30">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/30">
                           <div className="flex items-center justify-center mb-3">
                             <div className="w-8 h-8 bg-white/30 rounded-full flex items-center justify-center mr-3">
                               <span className="text-white font-bold">⏱</span>
                             </div>
-                            <h3 className="font-semibold text-lg">Duração</h3>
+                            <h3 className="font-semibold text-sm sm:text-lg">Duração</h3>
                           </div>
-                          <p className="font-bold text-xl">{protocol.duration}</p>
+                          <p className="font-bold text-base sm:text-xl">{protocol.duration}</p>
                         </div>
-                        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border border-white/30">
+                        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/30">
                           <div className="flex items-center justify-center mb-3">
                             <div className="w-8 h-8 bg-white/30 rounded-full flex items-center justify-center mr-3">
                               <span className="text-white font-bold">💰</span>
                             </div>
-                            <h3 className="font-semibold text-lg">Investimento</h3>
+                            <h3 className="font-semibold text-sm sm:text-lg">Investimento</h3>
                           </div>
-                          <p className="font-bold text-xl">{protocol.price}</p>
+                          <p className="font-bold text-base sm:text-xl">{protocol.price}</p>
                         </div>
                       </div>
                       
-                      <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border border-white/30">
-                        <h3 className="font-semibold text-lg mb-6 text-center">O que está incluído:</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/30">
+                        <h3 className="font-semibold text-sm sm:text-lg mb-4 sm:mb-6 text-center">O que está incluído:</h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                           {protocol.benefits.map((benefit, index) => (
                             <div key={index} className="flex items-center text-white">
                               <div className="w-6 h-6 bg-white/30 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                                 <span className="text-white font-bold text-sm">✓</span>
                               </div>
-                              <span className="text-sm">{benefit}</span>
+                              <span className="text-xs sm:text-sm">{benefit}</span>
                             </div>
                           ))}
                         </div>
@@ -510,21 +515,22 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
                   <div className="relative">
                     <Button 
                       onClick={handleScheduleClick}
-                      className="w-full bg-gradient-to-r from-coral to-coral/80 hover:from-coral/90 hover:to-coral/70 text-white px-8 py-6 text-xl font-bold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 border-0"
+                      className="w-full bg-gradient-to-r from-coral to-coral/80 hover:from-coral/90 hover:to-coral/70 text-white px-6 sm:px-8 py-4 sm:py-6 text-lg sm:text-xl font-bold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 border-0"
                     >
                       <div className="flex items-center justify-center">
                         <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center mr-3">
                           <span className="text-white font-bold">📅</span>
                         </div>
-                        Agendar Consulta Gratuita
-                        <ArrowRight className="ml-3 h-6 w-6" />
+                        <span className="hidden sm:inline">Agendar Consulta Gratuita</span>
+                        <span className="sm:hidden">Agendar Consulta</span>
+                        <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
                       </div>
                     </Button>
                     <div className="absolute -inset-1 bg-gradient-to-r from-coral to-coral/80 rounded-2xl blur opacity-30 -z-10"></div>
                   </div>
                 </>
               ) : (
-                <div className="bg-gradient-to-br from-coral to-coral/80 text-white rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+                <div className="bg-gradient-to-br from-coral to-coral/80 text-white rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
                   {/* Background Pattern */}
                   <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-12 translate-x-12"></div>
                   <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-8 -translate-x-8"></div>
@@ -534,17 +540,17 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
                       <div className="inline-flex items-center justify-center w-12 h-12 bg-white/20 rounded-full mb-4">
                         <span className="text-white font-bold text-xl">📝</span>
                       </div>
-                      <h2 className="text-2xl font-bold mb-2 uppercase tracking-wide">
+                      <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 uppercase tracking-wide">
                         Complete seus dados para agendar
                       </h2>
-                      <p className="text-white/80 text-sm">
+                      <p className="text-white/80 text-xs sm:text-sm">
                         Seus dados serão enviados diretamente para o WhatsApp do Dr. Fernando
                       </p>
                     </div>
                     
-                    <form onSubmit={handleContactSubmit} className="space-y-6">
+                    <form onSubmit={handleContactSubmit} className="space-y-4 sm:space-y-6">
                       <div>
-                        <label className="block text-sm font-medium text-white/90 mb-3">
+                        <label className="block text-xs sm:text-sm font-medium text-white/90 mb-2 sm:mb-3">
                           Nome completo *
                         </label>
                         <input
@@ -552,12 +558,12 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
                           required
                           value={userData.name}
                           onChange={(e) => setUserData(prev => ({ ...prev, name: e.target.value }))}
-                          className="w-full px-4 py-4 border border-white/30 rounded-xl focus:border-white focus:outline-none transition-colors bg-white/10 text-white placeholder-white/70 text-lg"
+                          className="w-full px-3 sm:px-4 py-3 sm:py-4 border border-white/30 rounded-xl focus:border-white focus:outline-none transition-colors bg-white/10 text-white placeholder-white/70 text-sm sm:text-lg"
                           placeholder="Seu nome completo"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-white/90 mb-3">
+                        <label className="block text-xs sm:text-sm font-medium text-white/90 mb-2 sm:mb-3">
                           Email *
                         </label>
                         <input
@@ -565,12 +571,12 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
                           required
                           value={userData.email}
                           onChange={(e) => setUserData(prev => ({ ...prev, email: e.target.value }))}
-                          className="w-full px-4 py-4 border border-white/30 rounded-xl focus:border-white focus:outline-none transition-colors bg-white/10 text-white placeholder-white/70 text-lg"
+                          className="w-full px-3 sm:px-4 py-3 sm:py-4 border border-white/30 rounded-xl focus:border-white focus:outline-none transition-colors bg-white/10 text-white placeholder-white/70 text-sm sm:text-lg"
                           placeholder="seu@email.com"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-white/90 mb-3">
+                        <label className="block text-xs sm:text-sm font-medium text-white/90 mb-2 sm:mb-3">
                           Telefone/WhatsApp *
                         </label>
                         <input
@@ -578,25 +584,26 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
                           required
                           value={userData.phone}
                           onChange={(e) => setUserData(prev => ({ ...prev, phone: e.target.value }))}
-                          className="w-full px-4 py-4 border border-white/30 rounded-xl focus:border-white focus:outline-none transition-colors bg-white/10 text-white placeholder-white/70 text-lg"
+                          className="w-full px-3 sm:px-4 py-3 sm:py-4 border border-white/30 rounded-xl focus:border-white focus:outline-none transition-colors bg-white/10 text-white placeholder-white/70 text-sm sm:text-lg"
                           placeholder="(27) 99689-4540"
                         />
                       </div>
-                      <div className="flex gap-4 pt-4">
+                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-3 sm:pt-4">
                         <Button 
                           type="submit"
-                          className="flex-1 bg-white text-coral hover:bg-white/90 px-6 py-4 font-bold rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                          className="flex-1 bg-white text-coral hover:bg-white/90 px-4 sm:px-6 py-3 sm:py-4 font-bold rounded-xl text-sm sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                         >
                           <div className="flex items-center justify-center">
-                            <span className="mr-2">📱</span>
-                            Enviar para WhatsApp
-                            <ArrowRight className="ml-2 h-5 w-5" />
+                            <span className="mr-1 sm:mr-2">📱</span>
+                            <span className="hidden sm:inline">Enviar para WhatsApp</span>
+                            <span className="sm:hidden">Enviar</span>
+                            <ArrowRight className="ml-1 sm:ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                           </div>
                         </Button>
                         <button
                           type="button"
                           onClick={() => setShowContactForm(false)}
-                          className="px-6 py-4 text-white/80 hover:text-white transition-colors border border-white/30 rounded-xl hover:bg-white/10"
+                          className="px-4 sm:px-6 py-3 sm:py-4 text-white/80 hover:text-white transition-colors border border-white/30 rounded-xl hover:bg-white/10 text-sm sm:text-base"
                         >
                           Cancelar
                         </button>
