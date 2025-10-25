@@ -1,27 +1,13 @@
-import type { Metadata } from 'next'
+'use client'
+
+import { useState } from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { whatsappLink, generateMetadata } from '@/lib/utils'
-import { 
-  Clock, 
-  Shield, 
-  Zap, 
-  TrendingDown,
-  Heart,
-  Target,
-  CheckCircle,
-  ArrowRight,
-  Calendar,
-  Phone
-} from 'lucide-react'
+import { whatsappLink } from '@/lib/utils'
+import { ArrowRight, Calendar } from 'lucide-react'
 import Link from 'next/link'
-
-export const metadata = generateMetadata({
-  title: 'Protocolos Médicos - Dr. Fernando Del Piero',
-  description: 'Conheça os protocolos especializados do Dr. Fernando: Jejum Hormonal, Saúde Hormonal e Emagrecimento Inteligente. Baseados em evidências científicas.',
-  path: '/protocolos'
-})
+import { ProtocolModal } from '@/components/ProtocolModal'
 
 const jejumHormonal = {
   title: 'Jejum Hormonal',
@@ -46,80 +32,94 @@ const jejumHormonal = {
     'Monitoramento de marcadores hormonais',
     'Acompanhamento médico especializado'
   ],
+  whatsappMessage: 'Olá! Gostaria de saber mais sobre o protocolo de Jejum Hormonal.'
 }
 
 const saudeHormonal = {
   title: 'Saúde Hormonal',
   subtitle: 'Equilíbrio hormonal para todas as fases da vida',
   description: 'Abordagem completa para equilíbrio hormonal, incluindo menopausa, andropausa, distúrbios da tireoide e otimização metabólica. Protocolo personalizado baseado em evidências científicas.',
-  symptoms: [
-    'Desequilíbrios hormonais diversos',
-    'Alterações de humor e energia',
-    'Dificuldade para dormir',
-    'Ganho de peso e resistência à insulina',
-    'Baixa libido e performance'
+  benefits: [
+    'Equilíbrio hormonal completo',
+    'Melhora da energia e disposição',
+    'Otimização do sono e humor',
+    'Redução de sintomas da menopausa/andropausa',
+    'Melhora da função tireoidiana'
   ],
-  approach: [
+  forWho: [
+    'Mulheres na menopausa',
+    'Homens com andropausa',
+    'Pessoas com distúrbios da tireoide',
+    'Quem busca equilíbrio hormonal'
+  ],
+  safety: [
     'Avaliação hormonal completa',
     'Estratégias nutricionais específicas',
     'Exercícios adaptados para cada fase',
-    'Suplementação baseada em evidências',
-    'Manejo do estresse e sono'
+    'Suplementação baseada em evidências'
   ],
-  lifestyle: [
-    'Alimentação anti-inflamatória',
-    'Exercícios de força e cardio',
-    'Técnicas de relaxamento',
-    'Otimização do sono',
-    'Redução de toxinas ambientais'
-  ]
+  whatsappMessage: 'Olá! Gostaria de saber mais sobre o protocolo de Saúde Hormonal.'
 }
 
 const emagrecimento = {
   title: 'Emagrecimento Inteligente',
   subtitle: 'Perda de peso sustentável e eficaz',
   description: 'Emagrecimento que funciona a longo prazo, baseado na ciência do metabolismo e adaptado para sua realidade.',
-  metabolism: [
-    'Avaliação da taxa metabólica',
-    'Identificação de desequilíbrios hormonais',
-    'Otimização da função tireoidiana',
-    'Melhora da sensibilidade à insulina',
-    'Regulação do cortisol'
+  benefits: [
+    'Aceleração do metabolismo',
+    'Quebra de platôs de peso',
+    'Manutenção dos resultados',
+    'Melhora da composição corporal',
+    'Aumento da energia'
   ],
-  antiPlateau: [
-    'Variação estratégica de calorias',
-    'Ciclagem de carboidratos',
-    'Refeeds programados',
-    'Exercícios metabólicos',
-    'Monitoramento de adaptações'
+  forWho: [
+    'Pessoas que não conseguem emagrecer',
+    'Quem está em platô de peso',
+    'Pessoas com metabolismo lento',
+    'Quem busca resultados sustentáveis'
   ],
-  maintenance: [
-    'Transição gradual para manutenção',
-    'Estratégias de adesão a longo prazo',
+  safety: [
+    'Avaliação metabólica completa',
+    'Protocolo personalizado',
     'Monitoramento contínuo',
-    'Ajustes baseados na resposta',
-    'Suporte psicológico'
-  ]
+    'Acompanhamento nutricional'
+  ],
+  whatsappMessage: 'Olá! Gostaria de saber mais sobre o protocolo de Emagrecimento Inteligente.'
 }
 
 export default function ProtocolosPage() {
+  const [activeModal, setActiveModal] = useState<string | null>(null)
+
+  const getProtocolData = (protocol: string) => {
+    switch (protocol) {
+      case 'jejum-hormonal':
+        return jejumHormonal
+      case 'saude-hormonal':
+        return saudeHormonal
+      case 'emagrecimento':
+        return emagrecimento
+      default:
+        return null
+    }
+  }
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 to-peach-200/5">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="py-12 sm:py-20 bg-gradient-to-br from-primary/5 to-peach-200/5">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
               Protocolos Especializados
             </h1>
-            <p className="mt-6 text-xl leading-8 text-gray-600 max-w-3xl mx-auto">
+            <p className="mt-4 sm:mt-6 text-lg sm:text-xl leading-7 sm:leading-8 text-gray-600 max-w-3xl mx-auto px-4">
               Metodologias baseadas em evidências científicas para resultados reais e sustentáveis. 
               Cada protocolo é personalizado para sua realidade e objetivos.
             </p>
-            <div className="mt-10">
-              <Button asChild size="lg" className="bg-coral hover:bg-coral/90">
+            <div className="mt-8 sm:mt-10">
+              <Button asChild size="lg" className="bg-coral hover:bg-coral/90 text-sm sm:text-base px-6 py-3">
                 <Link href={whatsappLink('Olá! Gostaria de saber mais sobre os protocolos.')}>
-                  <Calendar className="mr-2 h-5 w-5" />
+                  <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   Agendar consulta
                 </Link>
               </Button>
@@ -128,259 +128,102 @@ export default function ProtocolosPage() {
         </div>
       </section>
 
-      {/* Jejum Hormonal */}
-      <section id="jejum-hormonal" className="py-20 bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-4">
-                {jejumHormonal.title}
-              </h2>
-              <p className="text-lg text-primary font-semibold mb-6">
-                {jejumHormonal.subtitle}
-              </p>
-              <p className="text-lg text-gray-600 mb-8">
-                {jejumHormonal.description}
-              </p>
-              
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <Zap className="mr-2 h-5 w-5 text-primary" />
-                    Benefícios
-                  </h3>
-                  <ul className="space-y-2">
-                    {jejumHormonal.benefits.map((benefit, index) => (
-                      <li key={index} className="flex items-center text-gray-600">
-                        <CheckCircle className="mr-2 h-4 w-4 text-peach-400" />
-                        {benefit}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <Target className="mr-2 h-5 w-5 text-primary" />
-                    Para quem é indicado
-                  </h3>
-                  <ul className="space-y-2">
-                    {jejumHormonal.forWho.map((item, index) => (
-                      <li key={index} className="flex items-center text-gray-600">
-                        <CheckCircle className="mr-2 h-4 w-4 text-peach-400" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <Shield className="mr-2 h-5 w-5 text-primary" />
-                    Segurança
-                  </h3>
-                  <ul className="space-y-2">
-                    {jejumHormonal.safety.map((item, index) => (
-                      <li key={index} className="flex items-center text-gray-600">
-                        <CheckCircle className="mr-2 h-4 w-4 text-peach-400" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+      {/* Protocolos Cards */}
+      <section className="py-12 sm:py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            {/* Jejum Hormonal Card */}
+            <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <Image
+                  src="/images/Jejum Hormonal.jpeg"
+                  alt="Jejum Hormonal"
+                  fill
+                  className="object-cover"
+                  unoptimized={true}
+                />
               </div>
-
-              <div className="mt-8 space-y-4">
-                <Button asChild size="lg">
-                  <Link href={whatsappLink('Olá! Gostaria de saber mais sobre o Jejum Hormonal.')}>
-                    Quero saber mais
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
+              <CardHeader className="flex-grow px-4 sm:px-6 pt-4 sm:pt-6">
+                <CardTitle className="text-lg sm:text-xl">{jejumHormonal.title}</CardTitle>
+                <CardDescription className="text-sm sm:text-base">{jejumHormonal.subtitle}</CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-col justify-between h-full px-4 sm:px-6 pb-4 sm:pb-6">
+                <p className="text-gray-600 flex-grow text-sm sm:text-base leading-relaxed">{jejumHormonal.description}</p>
+                <Button 
+                  onClick={() => setActiveModal('jejum-hormonal')}
+                  className="w-full bg-coral hover:bg-coral/90 text-white -mt-24 sm:-mt-32 text-sm sm:text-base py-2 sm:py-3"
+                >
+                  Ver Detalhes
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
-                
+              </CardContent>
+            </Card>
+
+            {/* Saúde Hormonal Card */}
+            <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <Image
+                  src="/images/Saúde Hormonal.jpeg"
+                  alt="Saúde Hormonal"
+                  fill
+                  className="object-cover"
+                  unoptimized={true}
+                />
               </div>
-            </div>
-            <div className="relative">
-              <Image
-                src="/images/jejum-hormonal-protocolo.jpg"
-                alt="Jejum Hormonal"
-                width={600}
-                height={600}
-                className="rounded-2xl shadow-xl"
-              />
-            </div>
+              <CardHeader className="flex-grow px-4 sm:px-6 pt-4 sm:pt-6">
+                <CardTitle className="text-lg sm:text-xl">{saudeHormonal.title}</CardTitle>
+                <CardDescription className="text-sm sm:text-base">{saudeHormonal.subtitle}</CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-col justify-between h-full px-4 sm:px-6 pb-4 sm:pb-6">
+                <p className="text-gray-600 flex-grow text-sm sm:text-base leading-relaxed">{saudeHormonal.description}</p>
+                <Button 
+                  onClick={() => setActiveModal('saude-hormonal')}
+                  className="w-full bg-coral hover:bg-coral/90 text-white -mt-24 sm:-mt-32 text-sm sm:text-base py-2 sm:py-3"
+                >
+                  Ver Detalhes
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Emagrecimento Card */}
+            <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
+              <div className="aspect-[4/3] relative overflow-hidden">
+                <Image
+                  src="/images/emagrecimento-inteligente.avif"
+                  alt="Emagrecimento Inteligente"
+                  fill
+                  className="object-cover"
+                  unoptimized={true}
+                />
+              </div>
+              <CardHeader className="flex-grow px-4 sm:px-6 pt-4 sm:pt-6">
+                <CardTitle className="text-lg sm:text-xl">{emagrecimento.title}</CardTitle>
+                <CardDescription className="text-sm sm:text-base">{emagrecimento.subtitle}</CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-col justify-between h-full px-4 sm:px-6 pb-4 sm:pb-6">
+                <p className="text-gray-600 flex-grow text-sm sm:text-base leading-relaxed">{emagrecimento.description}</p>
+                <Button 
+                  onClick={() => setActiveModal('emagrecimento')}
+                  className="w-full bg-coral hover:bg-coral/90 text-white -mt-24 sm:-mt-32 text-sm sm:text-base py-2 sm:py-3"
+                >
+                  Ver Detalhes
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* Saúde Hormonal */}
-      <section id="saude-hormonal" className="py-20 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <div className="relative order-2 lg:order-1">
-              <Image
-                src="/images/saude-hormonal-protocolo.jpg"
-                alt="Saúde Hormonal"
-                width={600}
-                height={600}
-                className="rounded-2xl shadow-xl"
-              />
-            </div>
-            <div className="order-1 lg:order-2">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-4">
-                {saudeHormonal.title}
-              </h2>
-              <p className="text-lg text-primary font-semibold mb-6">
-                {saudeHormonal.subtitle}
-              </p>
-              <p className="text-lg text-gray-600 mb-8">
-                {saudeHormonal.description}
-              </p>
-              
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <Heart className="mr-2 h-5 w-5 text-primary" />
-                    Sintomas abordados
-                  </h3>
-                  <ul className="space-y-2">
-                    {saudeHormonal.symptoms.map((symptom, index) => (
-                      <li key={index} className="flex items-center text-gray-600">
-                        <CheckCircle className="mr-2 h-4 w-4 text-peach-400" />
-                        {symptom}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <Target className="mr-2 h-5 w-5 text-primary" />
-                    Nossa abordagem
-                  </h3>
-                  <ul className="space-y-2">
-                    {saudeHormonal.approach.map((item, index) => (
-                      <li key={index} className="flex items-center text-gray-600">
-                        <CheckCircle className="mr-2 h-4 w-4 text-peach-400" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <Zap className="mr-2 h-5 w-5 text-primary" />
-                    Estilo de vida
-                  </h3>
-                  <ul className="space-y-2">
-                    {saudeHormonal.lifestyle.map((item, index) => (
-                      <li key={index} className="flex items-center text-gray-600">
-                        <CheckCircle className="mr-2 h-4 w-4 text-peach-400" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <div className="mt-8">
-                <Button asChild size="lg">
-                  <Link href={whatsappLink('Olá! Gostaria de saber mais sobre o protocolo de Saúde Hormonal.')}>
-                    Quero saber mais
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Emagrecimento */}
-      <section id="emagrecimento" className="py-20 bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-4">
-                {emagrecimento.title}
-              </h2>
-              <p className="text-lg text-primary font-semibold mb-6">
-                {emagrecimento.subtitle}
-              </p>
-              <p className="text-lg text-gray-600 mb-8">
-                {emagrecimento.description}
-              </p>
-              
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <TrendingDown className="mr-2 h-5 w-5 text-primary" />
-                    Otimização metabólica
-                  </h3>
-                  <ul className="space-y-2">
-                    {emagrecimento.metabolism.map((item, index) => (
-                      <li key={index} className="flex items-center text-gray-600">
-                        <CheckCircle className="mr-2 h-4 w-4 text-peach-400" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <Zap className="mr-2 h-5 w-5 text-primary" />
-                    Anti-platô
-                  </h3>
-                  <ul className="space-y-2">
-                    {emagrecimento.antiPlateau.map((item, index) => (
-                      <li key={index} className="flex items-center text-gray-600">
-                        <CheckCircle className="mr-2 h-4 w-4 text-peach-400" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <Target className="mr-2 h-5 w-5 text-primary" />
-                    Manutenção
-                  </h3>
-                  <ul className="space-y-2">
-                    {emagrecimento.maintenance.map((item, index) => (
-                      <li key={index} className="flex items-center text-gray-600">
-                        <CheckCircle className="mr-2 h-4 w-4 text-peach-400" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <div className="mt-8">
-                <Button asChild size="lg">
-                  <Link href={whatsappLink('Olá! Gostaria de saber mais sobre o Emagrecimento Inteligente.')}>
-                    Quero saber mais
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-            <div className="relative">
-              <Image
-                src="/images/emagrecimento-protocolo.jpg"
-                alt="Emagrecimento Inteligente"
-                width={600}
-                height={600}
-                className="rounded-2xl shadow-xl"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
+      {/* Modals */}
+      {activeModal && getProtocolData(activeModal) && (
+        <ProtocolModal
+          isOpen={!!activeModal}
+          onClose={() => setActiveModal(null)}
+          protocol={getProtocolData(activeModal)!}
+        />
+      )}
     </div>
   )
 }

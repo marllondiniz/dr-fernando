@@ -110,13 +110,13 @@ export function Footer() {
 
         <div className="mt-12 border-t border-coral/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-charcoal-500">
+            <p className="text-sm text-charcoal-900 text-center md:text-left">
               © 2024 Dr. Fernando Del Piero. Todos os direitos reservados.
             </p>
             <div className="mt-4 md:mt-0">
               <Link
                 href="/aviso-legal"
-                className="text-sm text-charcoal-500 hover:text-coral transition-colors"
+                className="text-sm text-charcoal-900 hover:text-coral transition-colors"
               >
                 Aviso Legal
               </Link>

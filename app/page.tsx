@@ -115,23 +115,25 @@ export default function HomePage() {
               </Button>
               </div>
               
-              {/* Stats Section */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-2xl mx-auto lg:mx-0">
-                <div className="text-center lg:text-left">
-                  <div className="text-2xl sm:text-3xl font-bold text-coral mb-1">2000+</div>
-                  <div className="text-sm sm:text-base text-charcoal-600">Clientes Atendidos</div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="text-2xl sm:text-3xl font-bold text-coral mb-1">95%</div>
-                  <div className="text-sm sm:text-base text-charcoal-600">Taxa de Sucesso</div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="text-2xl sm:text-3xl font-bold text-coral mb-1">-15kg</div>
-                  <div className="text-sm sm:text-base text-charcoal-600">Perda Média</div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="text-2xl sm:text-3xl font-bold text-coral mb-1">5</div>
-                  <div className="text-sm sm:text-base text-charcoal-600">Anos de Experiência</div>
+              {/* Stats Section - Desktop Only */}
+              <div className="hidden sm:block max-w-2xl mx-auto lg:mx-0">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+                  <div className="text-center lg:text-left">
+                    <div className="text-2xl lg:text-3xl font-bold text-coral mb-1">2000+</div>
+                    <div className="text-sm lg:text-base text-charcoal-600">Clientes Atendidos</div>
+                  </div>
+                  <div className="text-center lg:text-left">
+                    <div className="text-2xl lg:text-3xl font-bold text-coral mb-1">95%</div>
+                    <div className="text-sm lg:text-base text-charcoal-600">Taxa de Sucesso</div>
+                  </div>
+                  <div className="text-center lg:text-left">
+                    <div className="text-2xl lg:text-3xl font-bold text-coral mb-1">-15kg</div>
+                    <div className="text-sm lg:text-base text-charcoal-600">Perda Média</div>
+                  </div>
+                  <div className="text-center lg:text-left">
+                    <div className="text-2xl lg:text-3xl font-bold text-coral mb-1">5</div>
+                    <div className="text-sm lg:text-base text-charcoal-600">Anos de Experiência</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -254,8 +256,14 @@ export default function HomePage() {
             </div>
             
             <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
-              <div className="aspect-video bg-gradient-to-br from-coral/20 to-coral/10 flex items-center justify-center">
-                <Heart className="h-16 w-16 text-coral" />
+              <div className="aspect-video relative overflow-hidden">
+                <Image
+                  src="/images/Saúde Hormonal.jpeg"
+                  alt="Saúde Hormonal"
+                  fill
+                  className="object-cover"
+                  unoptimized={true}
+                />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-charcoal-900 mb-3">
@@ -274,8 +282,14 @@ export default function HomePage() {
             </div>
             
             <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
-              <div className="aspect-video bg-gradient-to-br from-coral/20 to-coral/10 flex items-center justify-center">
-                <Zap className="h-16 w-16 text-coral" />
+              <div className="aspect-video relative overflow-hidden">
+                <Image
+                  src="/images/Jejum Hormonal.jpeg"
+                  alt="Jejum Hormonal"
+                  fill
+                  className="object-cover"
+                  unoptimized={true}
+                />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-charcoal-900 mb-3">
@@ -374,7 +388,7 @@ export default function HomePage() {
           </div>
           
           <div className="text-center mt-12">
-            <Button asChild variant="outline" size="lg">
+            <Button asChild size="lg" className="bg-coral hover:bg-coral/90 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold">
               <Link href="/conteudo">
                 Ver todos os artigos
                 <ArrowRight className="ml-2 h-5 w-5" />
