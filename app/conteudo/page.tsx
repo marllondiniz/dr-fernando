@@ -156,7 +156,7 @@ export default function ConteudoPage() {
                       </span>
                     ))}
                   </div>
-                  <Button asChild variant="outline" size="sm" className="w-full border-primary text-primary hover:bg-primary hover:text-white text-sm">
+                  <Button asChild size="lg" className="w-full bg-coral hover:bg-coral/90 text-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold text-sm">
                     <Link href={`/conteudo/${post.slug}`}>
                       Ler artigo
                       <ArrowRight className="ml-2 h-4 w-4" />

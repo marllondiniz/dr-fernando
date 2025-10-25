@@ -12,6 +12,7 @@ import {
   ArrowRight,
   Calendar
 } from 'lucide-react'
+import { BlogCarousel } from '@/components/BlogCarousel'
 
 export const metadata = generateMetadata({
   title: 'Dr. Fernando Del Piero - Saúde Metabólica sem Achismo',
@@ -368,39 +369,7 @@ export default function HomePage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
-              <div key={index} className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                <div className="aspect-video relative overflow-hidden">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-300"
-                    priority={index < 3}
-                    unoptimized={true}
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-charcoal-900 mb-3">
-                    {post.title}
-                  </h3>
-                  <p className="text-charcoal-600 mb-4">
-                    {post.excerpt}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-charcoal-500">{post.readTime} de leitura</span>
-                    <Button asChild variant="outline" size="sm">
-                      <Link href={post.href}>
-                        Ler artigo
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <BlogCarousel posts={blogPosts} />
           
           <div className="text-center mt-12">
             <Button asChild size="lg" className="bg-coral hover:bg-coral/90 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold">
