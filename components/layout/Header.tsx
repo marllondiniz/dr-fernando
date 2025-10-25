@@ -3,40 +3,17 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { whatsappLink } from '@/lib/utils'
 
 const navigation = [
-  { name: 'SERVIÇOS', href: '/protocolos', hasDropdown: true },
+  { name: 'SERVIÇOS', href: '/protocolos' },
   { name: 'BLOG', href: '/conteudo' },
   { name: 'DR. FERNANDO', href: '/sobre' },
 ]
 
-const treatmentDropdown = [
-  { name: 'Jejum Hormonal', href: '/protocolos#jejum-hormonal' },
-  { name: 'Saúde Hormonal', href: '/protocolos#saude-hormonal' },
-  { name: 'Emagrecimento', href: '/protocolos#emagrecimento' },
-]
-
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(null)
-
-  const handleMouseEnter = () => {
-    if (dropdownTimeout) {
-      clearTimeout(dropdownTimeout)
-      setDropdownTimeout(null)
-    }
-    setDropdownOpen(true)
-  }
-
-  const handleMouseLeave = () => {
-    const timeout = setTimeout(() => {
-      setDropdownOpen(false)
-    }, 150) // 150ms delay
-    setDropdownTimeout(timeout)
-  }
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-champagne-300">
@@ -66,48 +43,13 @@ export function Header() {
         {/* Center navigation */}
         <div className="hidden lg:flex lg:gap-x-8 lg:items-center">
           {navigation.map((item) => (
-            <div key={item.name} className="relative">
-              {item.hasDropdown ? (
-                <div 
-                  className="relative"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <button className="flex items-center text-sm font-semibold leading-6 text-charcoal-900 hover:text-coral transition-all duration-300 uppercase px-2 py-1">
-                    {item.name}
-                    <ChevronDown className="ml-1 h-4 w-4" />
-                  </button>
-                  
-                  {/* Dropdown menu */}
-                  {dropdownOpen && (
-                    <div 
-                      className="absolute top-full left-0 mt-1 w-48 bg-white border border-champagne-300 rounded-lg shadow-lg z-50"
-                      onMouseEnter={handleMouseEnter}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      <div className="py-2">
-                        {treatmentDropdown.map((dropdownItem) => (
-                          <Link
-                            key={dropdownItem.name}
-                            href={dropdownItem.href}
-                            className="block px-4 py-2 text-sm text-charcoal-900 hover:text-coral hover:bg-champagne-50 transition-all duration-300"
-                          >
-                            {dropdownItem.name}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <Link
-                  href={item.href}
-                  className="text-sm font-semibold leading-6 text-charcoal-900 hover:text-coral transition-all duration-300 uppercase"
-                >
-                  {item.name}
-                </Link>
-              )}
-            </div>
+            <Link
+              key={item.name}
+              href={item.href}
+              className="text-sm font-semibold leading-6 text-charcoal-900 hover:text-coral transition-all duration-300 uppercase"
+            >
+              {item.name}
+            </Link>
           ))}
         </div>
         
@@ -144,29 +86,14 @@ export function Header() {
               <div className="-my-6 divide-y divide-champagne-300">
                 <div className="space-y-2 py-6">
                   {navigation.map((item) => (
-                    <div key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-charcoal-900 hover:text-coral transition-all duration-300 uppercase"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                      {item.hasDropdown && (
-                        <div className="ml-4 mt-2 space-y-1">
-                          {treatmentDropdown.map((dropdownItem) => (
-                            <Link
-                              key={dropdownItem.name}
-                              href={dropdownItem.href}
-                              className="block px-3 py-1 text-sm text-charcoal-700 hover:text-coral transition-all duration-300"
-                              onClick={() => setMobileMenuOpen(false)}
-                            >
-                              {dropdownItem.name}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-charcoal-900 hover:text-coral transition-all duration-300 uppercase"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
                   ))}
                 </div>
                 <div className="py-6">
