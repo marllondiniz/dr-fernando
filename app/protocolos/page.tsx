@@ -105,29 +105,6 @@ export default function ProtocolosPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="py-12 sm:py-20 bg-gradient-to-br from-primary/5 to-peach-200/5">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
-              Protocolos Especializados
-            </h1>
-            <p className="mt-4 sm:mt-6 text-lg sm:text-xl leading-7 sm:leading-8 text-gray-600 max-w-3xl mx-auto px-4">
-              Metodologias baseadas em evidências científicas para resultados reais e sustentáveis. 
-              Cada protocolo é personalizado para sua realidade e objetivos.
-            </p>
-            <div className="mt-8 sm:mt-10">
-              <Button asChild size="lg" className="bg-coral hover:bg-coral/90 text-sm sm:text-base px-6 py-3">
-                <Link href={whatsappLink('Olá! Gostaria de saber mais sobre os protocolos.')}>
-                  <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                  Agendar consulta
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Protocolos Cards */}
       <section className="py-12 sm:py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -212,6 +189,29 @@ export default function ProtocolosPage() {
                 </Button>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Protocolos Especializados Section */}
+      <section className="py-12 sm:py-20 bg-gradient-to-br from-primary/5 to-peach-200/5">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900">
+              Protocolos Especializados
+            </h2>
+            <p className="mt-4 sm:mt-6 text-lg sm:text-xl leading-7 sm:leading-8 text-gray-600 max-w-3xl mx-auto px-4">
+              Metodologias baseadas em evidências científicas para resultados reais e sustentáveis. 
+              Cada protocolo é personalizado para sua realidade e objetivos.
+            </p>
+            <div className="mt-8 sm:mt-10">
+              <Button asChild size="lg" className="bg-coral hover:bg-coral/90 text-sm sm:text-base px-6 py-3">
+                <Link href={whatsappLink('Olá! Gostaria de saber mais sobre os protocolos.')}>
+                  <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                  Agendar consulta
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
