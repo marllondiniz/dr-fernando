@@ -26,15 +26,15 @@ export function BlogCarousel({ posts }: BlogCarouselProps) {
 
   // Check if mobile on mount and resize
   useEffect(() => {
-    setIsMounted(true)
-    
     const checkMobile = () => {
       if (typeof window !== 'undefined') {
         setIsMobile(window.innerWidth < 768)
       }
     }
     
+    setIsMounted(true)
     checkMobile()
+    
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', checkMobile)
       return () => window.removeEventListener('resize', checkMobile)
@@ -43,9 +43,9 @@ export function BlogCarousel({ posts }: BlogCarouselProps) {
 
   // Auto-play functionality
   useEffect(() => {
-    if (!isAutoPlaying) return
+    if (!isAutoPlaying || !isMounted) return
 
-    const maxIndex = isMobile ? posts.length - 1 : posts.length - 3
+    const maxIndex = isMobile ? posts.length - 1 : Math.max(0, posts.length - 3)
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => 
         prevIndex >= maxIndex ? 0 : prevIndex + 1
@@ -53,17 +53,17 @@ export function BlogCarousel({ posts }: BlogCarouselProps) {
     }, 5000) // Change slide every 5 seconds
 
     return () => clearInterval(interval)
-  }, [isAutoPlaying, posts.length, isMobile])
+  }, [isAutoPlaying, posts.length, isMobile, isMounted])
 
   const goToPrevious = () => {
     setIsAutoPlaying(false)
-    const maxIndex = isMobile ? posts.length - 1 : posts.length - 3
+    const maxIndex = isMobile ? posts.length - 1 : Math.max(0, posts.length - 3)
     setCurrentIndex(currentIndex === 0 ? maxIndex : currentIndex - 1)
   }
 
   const goToNext = () => {
     setIsAutoPlaying(false)
-    const maxIndex = isMobile ? posts.length - 1 : posts.length - 3
+    const maxIndex = isMobile ? posts.length - 1 : Math.max(0, posts.length - 3)
     setCurrentIndex(currentIndex >= maxIndex ? 0 : currentIndex + 1)
   }
 
@@ -72,33 +72,7 @@ export function BlogCarousel({ posts }: BlogCarouselProps) {
     setCurrentIndex(index)
   }
 
-  // Não renderizar até estar montado no cliente
-  if (!isMounted) {
-    return (
-      <div className="relative">
-        <div className="overflow-hidden rounded-2xl">
-          <div className="flex">
-            {posts.slice(0, 3).map((post, index) => (
-              <div key={index} className="w-full md:w-1/3 flex-shrink-0">
-                <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden mx-2 h-full flex flex-col">
-                  <div className="aspect-video relative overflow-hidden bg-gray-200 animate-pulse">
-                  </div>
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="h-6 bg-gray-200 rounded animate-pulse mb-3"></div>
-                    <div className="h-4 bg-gray-200 rounded animate-pulse mb-4 flex-grow"></div>
-                    <div className="flex items-center justify-between mt-auto">
-                      <div className="h-4 w-20 bg-gray-200 rounded animate-pulse"></div>
-                      <div className="h-8 w-24 bg-gray-200 rounded animate-pulse"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    )
-  }
+
 
   return (
     <div className="relative">

@@ -81,6 +81,27 @@ const blogPosts = [
     href: '/conteudo/por-que-nao-consegue-emagrecer',
     image: '/images/por-que-nao-consegue-emagrecer.webp',
     readTime: '7 min'
+  },
+  {
+    title: 'Saúde Hormonal: Equilibre Seus Hormônios Naturalmente',
+    excerpt: 'Descubra como manter o equilíbrio hormonal através de mudanças no estilo de vida e alimentação.',
+    href: '/conteudo/hormonios-emagrecimento',
+    image: '/images/Saúde Hormonal.jpeg',
+    readTime: '9 min'
+  },
+  {
+    title: 'Emagrecimento Inteligente: A Ciência por Trás da Perda de Peso',
+    excerpt: 'Entenda os mecanismos metabólicos que realmente importam para emagrecer de forma sustentável.',
+    href: '/conteudo/metabolismo-lento-solucoes',
+    image: '/images/emagrecimento-inteligente.avif',
+    readTime: '10 min'
+  },
+  {
+    title: 'Exercício e Jejum: Benefícios e Precauções',
+    excerpt: 'Como combinar exercícios físicos com jejum intermitente para maximizar seus resultados.',
+    href: '/conteudo/exercicio-jejum-beneficios',
+    image: '/images/blog/exercicio-jejum.jpg',
+    readTime: '8 min'
   }
 ]
 
