@@ -9,7 +9,11 @@ import {
   Brain, 
   Target,
   Calendar,
-  Phone
+  Phone,
+  Microscope,
+  UserCheck,
+  Leaf,
+  Shield
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -69,40 +73,34 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 to-peach-200/5">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                Dr. Fernando Del Piero
+      <section 
+        className="relative pt-2 pb-12 sm:pt-8 sm:pb-16 md:pt-12 md:pb-20 lg:pt-16 lg:pb-24 mobile-bg-center"
+        style={{
+          backgroundImage: 'url(/images/fundo-branco.png)',
+          backgroundSize: 'auto 100%',
+          backgroundPosition: 'center top',
+          backgroundRepeat: 'no-repeat',
+          minHeight: '100vh'
+        }}
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:pl-8 xl:pl-12">
+          <div className="flex flex-col items-center justify-start pt-5 sm:pt-12 md:pt-16 lg:pt-20 min-h-[70vh] text-center">
+            <div className="w-full max-w-4xl">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-charcoal-900 mb-4 sm:mb-6">
+                Dr. Fernando <span className="text-coral">Del Piero</span>
               </h1>
-              <p className="mt-6 text-xl leading-8 text-gray-600">
-                Médico especialista em metabolismo, emagrecimento e saúde da mulher. 
+              <p className="text-lg sm:text-xl text-charcoal-600 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed">
+                Médico especialista em metabolismo, emagrecimento e saúde da mulher.<br />
                 Abordagem baseada em evidências científicas para resultados reais e sustentáveis.
               </p>
-              <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <Button asChild size="lg" className="bg-coral hover:bg-coral/90">
+              <div className="flex justify-center mb-8 sm:mb-12">
+                <Button asChild size="lg" className="bg-coral hover:bg-coral/90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                   <Link href={whatsappLink('Olá! Gostaria de agendar uma consulta.')}>
-                    <Calendar className="mr-2 h-5 w-5" />
                     Agendar consulta
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link href="/protocolos">
-                    Ver protocolos
+                    <Calendar className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
               </div>
-            </div>
-            <div className="relative">
-              <Image
-                src="/images/dr-fernando-profile.jpg"
-                alt="Dr. Fernando Del Piero"
-                width={500}
-                height={600}
-                className="rounded-2xl shadow-2xl"
-                priority
-              />
             </div>
           </div>
         </div>
@@ -276,42 +274,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values */}
-      <section className="py-20 bg-gray-50">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Meus Valores
-            </h2>
-          </div>
-          <div className="space-y-8">
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Ciência Aplicada</h3>
-              <p className="text-lg text-gray-600">
-                Toda recomendação é baseada em evidências científicas sólidas e atualizadas.
-              </p>
-            </div>
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Personalização</h3>
-              <p className="text-lg text-gray-600">
-                Cada pessoa é única. Seus protocolos são adaptados para sua realidade e objetivos.
-              </p>
-            </div>
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Sustentabilidade</h3>
-              <p className="text-lg text-gray-600">
-                Foco em mudanças que você consegue manter a longo prazo, sem extremismos.
-              </p>
-            </div>
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Transparência</h3>
-              <p className="text-lg text-gray-600">
-                Sem promessas milagrosas. Resultados reais através de métodos comprovados.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
     </div>
   )

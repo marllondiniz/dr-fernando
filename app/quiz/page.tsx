@@ -262,23 +262,32 @@ export default function QuizPage() {
       })
       .join('\n')
     
-    return `Olá Dr. Fernando! 
+    const benefitsText = protocol.benefits.map(benefit => `• ${benefit}`).join('\n')
+    
+    return `🏥 *CONSULTA - DR. FERNANDO DEL PIERO*
 
-Completei o questionário de saúde metabólica e gostaria de agendar uma consulta gratuita.
+Olá Dr. Fernando! Completei o questionário de saúde metabólica e gostaria de agendar uma consulta.
 
-*Meu perfil:*
+📋 *MEU PERFIL:*
 • Objetivo principal: ${mainOptions.find(opt => opt.id === selectedOption)?.title}
 • Protocolo recomendado: ${protocol.title}
+• Duração: ${protocol.duration}
 
-*Minhas respostas:*
+📝 *MINHAS RESPOSTAS:*
 ${answersText}
 
-*Meus dados:*
+✅ *O QUE ESTÁ INCLUÍDO NO PROTOCOLO:*
+${benefitsText}
+
+👤 *MEUS DADOS:*
 • Nome: ${userData.name}
 • Email: ${userData.email}
 • Telefone: ${userData.phone}
 
-Aguardo seu retorno para agendarmos a consulta gratuita!`
+🎯 *INTERESSE:*
+Gostaria de agendar uma consulta para discutir este protocolo personalizado e iniciar meu tratamento.
+
+Aguardo seu retorno! 🙏`
   }
 
   const handleContactSubmit = (e: React.FormEvent) => {
@@ -469,8 +478,8 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
                         </p>
                       </div>
                       
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
-                        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/30">
+                      <div className="flex justify-center mb-6 sm:mb-8">
+                        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/30 max-w-xs">
                           <div className="flex items-center justify-center mb-3">
                             <div className="w-8 h-8 bg-white/30 rounded-full flex items-center justify-center mr-3">
                               <span className="text-white font-bold">⏱</span>
@@ -478,15 +487,6 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
                             <h3 className="font-semibold text-sm sm:text-lg">Duração</h3>
                           </div>
                           <p className="font-bold text-base sm:text-xl">{protocol.duration}</p>
-                        </div>
-                        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/30">
-                          <div className="flex items-center justify-center mb-3">
-                            <div className="w-8 h-8 bg-white/30 rounded-full flex items-center justify-center mr-3">
-                              <span className="text-white font-bold">💰</span>
-                            </div>
-                            <h3 className="font-semibold text-sm sm:text-lg">Investimento</h3>
-                          </div>
-                          <p className="font-bold text-base sm:text-xl">{protocol.price}</p>
                         </div>
                       </div>
                       
@@ -509,7 +509,30 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
               )
             })()}
             
-            <div className="space-y-6 mt-12">
+            {/* Resumo das Respostas */}
+            <div className="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-6 sm:p-8 shadow-lg border border-gray-100 mb-8">
+              <div className="text-center mb-6">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">📋 Resumo do seu perfil</h3>
+                <p className="text-sm sm:text-base text-gray-600">Suas respostas foram analisadas para criar seu protocolo personalizado</p>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                {Object.entries(answers).map(([key, value], index) => {
+                  const questionIndex = parseInt(key.split('_')[1])
+                  const questions = selectedOption ? subQuestions[selectedOption as keyof typeof subQuestions] : []
+                  const question = questions[questionIndex]
+                  
+                  return (
+                    <div key={index} className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100">
+                      <h4 className="text-sm sm:text-base font-semibold text-gray-900 mb-2">{question?.question}</h4>
+                      <p className="text-sm sm:text-base text-coral font-medium">{value}</p>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+            
+            <div className="space-y-6 mt-8">
               {!showContactForm ? (
                 <>
                   <div className="relative">
@@ -518,15 +541,23 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
                       className="w-full bg-gradient-to-r from-coral to-coral/80 hover:from-coral/90 hover:to-coral/70 text-white px-6 sm:px-8 py-4 sm:py-6 text-lg sm:text-xl font-bold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 border-0"
                     >
                       <div className="flex items-center justify-center">
-                        <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center mr-3">
-                          <span className="text-white font-bold">📅</span>
-                        </div>
-                        <span className="hidden sm:inline">Agendar Consulta Gratuita</span>
+                        <span className="hidden sm:inline">Agendar Consulta</span>
                         <span className="sm:hidden">Agendar Consulta</span>
                         <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
                       </div>
                     </Button>
                     <div className="absolute -inset-1 bg-gradient-to-r from-coral to-coral/80 rounded-2xl blur opacity-30 -z-10"></div>
+                  </div>
+                  
+                  <div className="text-center">
+                    <p className="text-sm text-gray-600 mb-4">
+                      📱 Suas informações serão enviadas diretamente para o WhatsApp do Dr. Fernando
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-2 text-xs text-gray-500">
+                      <span className="bg-gray-100 px-2 py-1 rounded-full">✓ Protocolo personalizado</span>
+                      <span className="bg-gray-100 px-2 py-1 rounded-full">✓ Consulta especializada</span>
+                      <span className="bg-gray-100 px-2 py-1 rounded-full">✓ Respostas analisadas</span>
+                    </div>
                   </div>
                 </>
               ) : (
@@ -583,9 +614,19 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
                           type="tel"
                           required
                           value={userData.phone}
-                          onChange={(e) => setUserData(prev => ({ ...prev, phone: e.target.value }))}
+                          onChange={(e) => {
+                            let value = e.target.value.replace(/\D/g, '')
+                            if (value.length >= 2) {
+                              value = `(${value.slice(0, 2)}) ${value.slice(2)}`
+                            }
+                            if (value.length >= 10) {
+                              value = value.slice(0, 15) // Limita o tamanho
+                            }
+                            setUserData(prev => ({ ...prev, phone: value }))
+                          }}
                           className="w-full px-3 sm:px-4 py-3 sm:py-4 border border-white/30 rounded-xl focus:border-white focus:outline-none transition-colors bg-white/10 text-white placeholder-white/70 text-sm sm:text-lg"
                           placeholder="(27) 99689-4540"
+                          maxLength={15}
                         />
                       </div>
                       <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-3 sm:pt-4">
@@ -594,7 +635,6 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
                           className="flex-1 bg-white text-coral hover:bg-white/90 px-4 sm:px-6 py-3 sm:py-4 font-bold rounded-xl text-sm sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                         >
                           <div className="flex items-center justify-center">
-                            <span className="mr-1 sm:mr-2">📱</span>
                             <span className="hidden sm:inline">Enviar para WhatsApp</span>
                             <span className="sm:hidden">Enviar</span>
                             <ArrowRight className="ml-1 sm:ml-2 h-4 w-4 sm:h-5 sm:w-5" />
@@ -615,7 +655,7 @@ Aguardo seu retorno para agendarmos a consulta gratuita!`
               
               <button
                 onClick={handleBackToMain}
-                className="text-charcoal-700 hover:text-coral transition-colors duration-300"
+                className="bg-coral hover:bg-coral/90 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 Fazer novo questionário
               </button>

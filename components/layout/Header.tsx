@@ -9,7 +9,7 @@ import { whatsappLink } from '@/lib/utils'
 const navigation = [
   { name: 'SERVIÇOS', href: '/protocolos', hasDropdown: true },
   { name: 'BLOG', href: '/conteudo' },
-  { name: 'QUEM SOMOS', href: '/sobre' },
+  { name: 'DR. FERNANDO', href: '/sobre' },
 ]
 
 const treatmentDropdown = [

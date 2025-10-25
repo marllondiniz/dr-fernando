@@ -4,6 +4,8 @@ import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { WhatsAppFloatButton } from '@/components/WhatsAppFloatButton'
+import { ScrollToTop } from '@/components/ScrollToTop'
+import { ScrollToTopButton } from '@/components/ScrollToTopButton'
 import { MetaPixel } from '@/components/analytics/MetaPixel'
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics'
 import { PersonSchema, MedicalOrganizationSchema } from '@/lib/schemas'
@@ -58,10 +60,12 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
+        <ScrollToTop />
         <Header />
         <main>{children}</main>
         <Footer />
         <WhatsAppFloatButton />
+        <ScrollToTopButton />
       </body>
     </html>
   )

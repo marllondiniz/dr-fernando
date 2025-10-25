@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { whatsappLink, generateMetadata } from '@/lib/utils'
+import { ScrollReveal } from '@/components/ScrollReveal'
 import { 
   TrendingDown, 
   Heart, 
@@ -87,7 +88,7 @@ export default function HomePage() {
     <div className="min-h-screen">
       {/* Hero Section - Manual Style */}
       <section 
-        className="relative pt-2 pb-12 sm:pt-8 sm:pb-16 md:pt-12 md:pb-20 lg:pt-16 lg:pb-24 mobile-bg-center"
+        className="relative pt-2 pb-12 sm:pt-15 sm:pb-16 md:pt-12 md:pb-20 lg:pt-16 lg:pb-24 mobile-bg-center"
         style={{
           backgroundImage: 'url(/images/fundo-trans.png)',
           backgroundSize: 'auto 100%',
@@ -99,21 +100,27 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:pl-8 xl:pl-12">
           <div className="flex items-start pt-4 sm:pt-12 md:pt-16 lg:pt-20 min-h-[70vh]">
             <div className="w-full lg:w-2/3 xl:w-1/2">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-charcoal-900 mb-4 sm:mb-6 text-center lg:text-left">
-                Cuidar da sua <span className="text-coral">saúde</span> nunca foi tão <span className="text-coral">simples</span>.
-              </h1>
-              <p className="text-lg sm:text-xl text-charcoal-600 mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed text-center lg:text-left">
-                Sem filas, sem burocracia, sem protocolos prontos.<br />
-                Aqui, ciência e tecnologia se unem para criar um tratamento totalmente personalizado e monitorado do início ao fim.
-              </p>
-              <div className="flex justify-center lg:justify-start mb-8 sm:mb-12">
-                <Button asChild size="lg" className="bg-coral hover:bg-coral/90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 w-full sm:w-auto">
-                <Link href="/quiz">
-                  Começar agora
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              </div>
+              <ScrollReveal direction="up" delay={200}>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-charcoal-900 mb-4 sm:mb-6 text-center lg:text-left">
+                  Cuidar da sua <span className="text-coral text-glow">saúde</span> nunca foi tão <span className="text-coral text-glow">simples</span>.
+                </h1>
+              </ScrollReveal>
+              <ScrollReveal direction="up" delay={400}>
+                <p className="text-lg sm:text-xl text-charcoal-600 mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed text-center lg:text-left">
+                  Sem filas, sem burocracia, sem protocolos prontos.<br />
+                  Aqui, ciência e tecnologia se unem para criar um tratamento totalmente personalizado e monitorado do início ao fim.
+                </p>
+              </ScrollReveal>
+              <ScrollReveal direction="up" delay={600}>
+                <div className="flex justify-center lg:justify-start mb-8 sm:mb-12">
+                  <Button asChild size="lg" className="bg-coral hover:bg-coral/90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 w-full sm:w-auto hover-glow">
+                    <Link href="/quiz">
+                      Começar agora
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                </div>
+              </ScrollReveal>
               
               {/* Stats Section - Desktop Only */}
               <div className="hidden sm:block max-w-2xl mx-auto lg:mx-0">
@@ -175,46 +182,54 @@ export default function HomePage() {
       {/* How It Works Section - Manual Style */}
       <section className="py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold tracking-tight text-charcoal-900 mb-6">
-              O jeito mais prático de cuidar da sua saúde
-            </h2>
-          </div>
+          <ScrollReveal direction="up">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold tracking-tight text-charcoal-900 mb-6 text-glow">
+                O jeito mais prático de cuidar da sua saúde
+              </h2>
+            </div>
+          </ScrollReveal>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="text-center">
-              <div className="w-20 h-20 bg-coral rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white font-bold text-2xl">1</span>
+            <ScrollReveal direction="left" delay={200}>
+              <div className="text-center">
+                <div className="w-20 h-20 bg-coral rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-glow">
+                  <span className="text-white font-bold text-2xl">1</span>
+                </div>
+                <h3 className="text-xl font-semibold text-charcoal-900 mb-4">
+                  Consultas presenciais e online
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed">
+                  Atendimento presencial em Vitória/ES ou online. Questionário rápido para avaliação médica personalizada.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-charcoal-900 mb-4">
-                Consultas presenciais e online
-              </h3>
-              <p className="text-charcoal-600 leading-relaxed">
-                Atendimento presencial em Vitória/ES ou online. Questionário rápido para avaliação médica personalizada.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-20 h-20 bg-coral rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white font-bold text-2xl">2</span>
+            </ScrollReveal>
+            <ScrollReveal direction="up" delay={400}>
+              <div className="text-center">
+                <div className="w-20 h-20 bg-coral rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-glow">
+                  <span className="text-white font-bold text-2xl">2</span>
+                </div>
+                <h3 className="text-xl font-semibold text-charcoal-900 mb-4">
+                  Tratamentos aprovados
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed">
+                  Protocolos baseados em evidências científicas, para você ter as melhores opções de tratamentos para o seu caso.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-charcoal-900 mb-4">
-                Tratamentos aprovados
-              </h3>
-              <p className="text-charcoal-600 leading-relaxed">
-                Protocolos baseados em evidências científicas, para você ter as melhores opções de tratamentos para o seu caso.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-20 h-20 bg-coral rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white font-bold text-2xl">3</span>
+            </ScrollReveal>
+            <ScrollReveal direction="right" delay={600}>
+              <div className="text-center">
+                <div className="w-20 h-20 bg-coral rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-glow">
+                  <span className="text-white font-bold text-2xl">3</span>
+                </div>
+                <h3 className="text-xl font-semibold text-charcoal-900 mb-4">
+                  Acompanhamento clínico
+                </h3>
+                <p className="text-charcoal-600 leading-relaxed">
+                  Suporte médico completo durante todo o tratamento. Especialistas disponíveis para dúvidas sobre medicações e efeitos colaterais.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-charcoal-900 mb-4">
-                Acompanhamento clínico
-              </h3>
-              <p className="text-charcoal-600 leading-relaxed">
-                Suporte médico completo durante todo o tratamento. Especialistas disponíveis para dúvidas sobre medicações e efeitos colaterais.
-              </p>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
