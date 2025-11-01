@@ -116,7 +116,7 @@ Substitua as imagens placeholder em `public/images/`:
 
 ### Outras plataformas
 
-O projeto é compatível com qualquer plataforma que suporte Next.js:
+O projeto é compatível com qualquer plataforma que suporte Next.js:jhjj
 - Netlify
 - Railway
 - DigitalOcean App Platform
